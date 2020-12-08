@@ -2,15 +2,23 @@ package org.example;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "Chest")
 public class Chest {
+    @Id
+    @Column(name = "chest_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "chest_name")
     private String name;
+    @Column(name = "chest_description")
     private String description;
-    private Item itemCarried;
+    @Column(name = "chest_item")
+    private Integer itemCarried;
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -18,16 +26,14 @@ public class Chest {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Item getItemCarried() {
+    public Integer getItemCarried() {
         return itemCarried;
     }
-
-    public void setItemCarried(Item itemCarried) {
+    public void setItemCarried(Integer itemCarried) {
         this.itemCarried = itemCarried;
     }
 

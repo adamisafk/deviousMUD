@@ -53,7 +53,8 @@ CREATE TABLE `Item` (
   `item_id` int NOT NULL AUTO_INCREMENT,
   `item_name` text NOT NULL,
   `item_description` int NOT NULL,
-  `item_attack_value` int NOT NULL,
+  `item_melee_damage` int NOT NULL,
+  `item_magic_damage` int NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -107,13 +108,13 @@ DROP TABLE IF EXISTS `Room`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Room` (
   `room_id` int NOT NULL AUTO_INCREMENT,
-  `room_name` text NOT NULL,
-  `room_description` text NOT NULL,
-  `room_no_of_npcs` int NOT NULL DEFAULT '0',
-  `room_no_of_chests` int NOT NULL DEFAULT '0',
-  `room_is_boss` tinyint(1) DEFAULT '0',
+  `room_description` varchar(255) DEFAULT NULL,
+  `room_is_boss` bit(1) DEFAULT NULL,
+  `room_name` varchar(255) DEFAULT NULL,
+  `room_no_of_chests` int DEFAULT NULL,
+  `room_no_of_npcs` int DEFAULT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +123,7 @@ CREATE TABLE `Room` (
 
 LOCK TABLES `Room` WRITE;
 /*!40000 ALTER TABLE `Room` DISABLE KEYS */;
+INSERT INTO `Room` (`room_id`, `room_description`, `room_is_boss`, `room_name`, `room_no_of_chests`, `room_no_of_npcs`) VALUES (1,'An abandoned city of Gods.',_binary '\0','Anor Londo',3,2);
 /*!40000 ALTER TABLE `Room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-07 17:05:03
+-- Dump completed on 2020-12-08 11:48:29
