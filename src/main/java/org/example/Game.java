@@ -81,7 +81,7 @@ public class Game {
                 help();
             } else if (answer == 3) {
                 //TODO: highscores
-            } else if (answer == 3) {
+            } else if (answer == 4) {
                 inGame = false;
             }
         }
