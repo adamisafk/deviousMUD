@@ -1,6 +1,7 @@
 package org.example;
 
-import javax.persistence.*;
+import org.example.entity.Item;
+import org.example.entity.NPC;
 
 public class Player {
     private String name;

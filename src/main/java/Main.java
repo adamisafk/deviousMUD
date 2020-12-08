@@ -1,6 +1,6 @@
 import org.example.Game;
-import org.example.JPAUtil;
-import org.example.Room;
+import org.example.entity.JPAUtil;
+import org.example.entity.Room;
 
 import javax.persistence.EntityManager;
 import java.util.*;
@@ -21,20 +21,8 @@ public class Main
 
 
     public static void ormTest() {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-        entityManager.getTransaction().begin();
-
-        Room newRoom = new Room();
-        newRoom.setName("Anor Londo");
-        newRoom.setDescription("An abandoned city of Gods.");
-        newRoom.setNoOfNpcs(2);
-        newRoom.setNoOfChests(3);
-        newRoom.setIs_boss(false);
-        entityManager.persist(newRoom);
-
-        entityManager.getTransaction().commit();
-
-        entityManager.close();
-        JPAUtil.shutdown();
+//        Room newRoom = JPAUtil.getRoom(1);
+//        System.out.println(newRoom.getName());
+        JPAUtil.setScore("Someone", 69);
     }
 }
