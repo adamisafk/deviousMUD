@@ -1,6 +1,8 @@
 package org.example;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "Room")
@@ -43,4 +45,5 @@ public class Room {
 
     public Boolean getIs_boss() { return is_boss; }
     public void setIs_boss(Boolean is_boss) { this.is_boss = is_boss; }
+
 }

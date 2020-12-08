@@ -11,11 +11,29 @@ public class Player {
     private int currentRoom;
 
     public void move(Direction direction) {
-
+        if(moveValidate(direction))
     }
 
-    public Boolean moveValidate(Direction direction) {
-        return true;
+
+    /**
+     * Function to validate whether the player can move into a room.
+     * @param direction
+     * @param currentRoom
+     * @return true or false, depending on whether the move is valid
+     */
+    public Boolean moveValidate(Direction direction, int currentRoom) {
+        if(currentRoom == 1){
+            return direction == Direction.E || direction == Direction.S;
+        } else if (currentRoom == 2){
+            return direction == Direction.W || direction == Direction.S;
+        } else if (currentRoom == 3){
+            return direction == Direction.E || direction == Direction.N;
+        } else if (currentRoom == 4){
+            return direction == Direction.W || direction == Direction.N || direction == Direction.E;
+        } else if (currentRoom == 5){
+            return direction == Direction.W;
+        }
+        return false;
     }
 
     public void hit(NPC npc) {
@@ -53,6 +71,5 @@ public class Player {
     public void setCurrentRoom(int currentRoom) { this.currentRoom = currentRoom; }
 
     public Player() {
-
     }
 }
