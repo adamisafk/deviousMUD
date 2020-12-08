@@ -107,7 +107,7 @@ public class Room {
             i = i + 1;
             System.out.println(chest.getName());
             System.out.println(chest.getDescription());
-            if (Chest[].length != i) {
+            if (chests.size() != i) {
                 System.out.println(" In another part of the room there is a ");
             } else {
                 System.out.println(". There are no other objects in the room");
