@@ -20,6 +20,10 @@ public class Room {
     @Column(name = "room_is_boss")
     private Boolean is_boss;
 
+    // TODO: change this
+    private ArrayList<Chest> chests;
+    private ArrayList<NPC> npcs;
+
     public Integer getId() {
         return id;
     }
@@ -43,4 +47,20 @@ public class Room {
 
     public Boolean getIs_boss() { return is_boss; }
     public void setIs_boss(Boolean is_boss) { this.is_boss = is_boss; }
+
+    public void describeChests() {
+        int i = 0;
+        System.out.println("In the corner there is a ");
+        for (Chest chest: chests) {
+            i = i + 1;
+            System.out.println(chests.getName());
+            System.out.println(chests.getDescription());
+            if (Chest[].length != i) {
+                System.out.println(" In another part of the room there is a ");
+            } else {
+                System.out.println(". There are no other objects in the room");
+            }
+        }
+
+    }
 }
