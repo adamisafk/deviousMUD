@@ -5,44 +5,45 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Room")
 public class Room {
-    private Integer roomId;
-    private String roomName;
-    private String roomDescription;
-    private Integer noOfNpcs;
-    private Integer noOfChests;
-    private Boolean is_boss;
-
     @Id
     @Column(name = "room_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getRoomId() {
-        return roomId;
+    private Integer id;
+    @Column(name = "room_name")
+    private String name;
+    @Column(name = "room_description")
+    private String description;
+    @Column(name = "room_no_of_npcs")
+    private Integer noOfNpcs;
+    @Column(name = "room_no_of_chests")
+    private Integer noOfChests;
+    @Column(name = "room_is_boss")
+    private Boolean is_boss;
+
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public String getDescription() {
+        return description;
     }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public String getRoomDescription() {
-        return roomDescription;
-    }
-
-    public void setRoomDescription(String roomDescription) {
-        this.roomDescription = roomDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getNoOfNpcs() {
         return noOfNpcs;
     }
-
     public void setNoOfNpcs(Integer noOfNpcs) {
         this.noOfNpcs = noOfNpcs;
     }
@@ -50,7 +51,6 @@ public class Room {
     public Integer getNoOfChests() {
         return noOfChests;
     }
-
     public void setNoOfChests(Integer noOfChests) {
         this.noOfChests = noOfChests;
     }
@@ -58,7 +58,6 @@ public class Room {
     public Boolean getIs_boss() {
         return is_boss;
     }
-
     public void setIs_boss(Boolean is_boss) {
         this.is_boss = is_boss;
     }
