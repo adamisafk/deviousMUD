@@ -39,6 +39,13 @@ public class Chest {
 
     public Chest() {
     }
+
+    public void describeItems() {
+        System.out.println("You find a ");
+        System.out.println(items.getName() & ". ");
+        System.out.println(items.getDescription);
+    }
+
 }
 
 
