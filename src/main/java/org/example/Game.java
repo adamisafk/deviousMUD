@@ -1,20 +1,26 @@
 package org.example;
-import java.util.*;
+
+import java.util.Scanner;
 
 public class Game {
-    static Scanner stdnin = new Scanner(System.in);
+    static Scanner stdin = new Scanner(System.in);
     private Board gameBoard;
     private Player player;
 
 
-    public void resetGame(){}
-    public void resetGameWithCurrentStats(Player player){}
-    public void newGame(){}
+    public void resetGame() {
+    }
+
+    public void resetGameWithCurrentStats(Player player) {
+    }
+
+    public void newGame() {
+    }
 
     public Game() {
     }
 
-    public void Help() {
+    public void help() {
 
         String userInput;
 
@@ -29,7 +35,7 @@ public class Game {
         System.out.println("Object: box, NPC: man, Item: sword");
 
         do {
-            userInput = stdnin.nextLine();
+            userInput = stdin.nextLine();
             if (userInput == "examine box") {
                 System.out.println("The box is damp and full of cobwebs, the outside is covered in mold and gives off a putrid stench");
             } else if (userInput == "examine man"){
@@ -39,14 +45,64 @@ public class Game {
             } else if (userInput == "move N") {
 
             }
-        } while (userInput != "exit");
+        } while (!userInput.equals("exit") );
 
 
     }
-}
+
+    /**
+     * Menu function
+     */
+    public void menu() {
+        boolean inGame = true;
+        asciiArt();
+        while (inGame) {
+
+            System.out.println("Please select an option: ");
+            System.out.println("[1] Start new game");
+            System.out.println("[2] Help");
+            System.out.println("[3] Highscores");
+            System.out.println("[4] Quit");
+
+            int answer;
+
+            while (true) {
+                System.out.println("Please enter 1, 2, 3, 4: ");
+                answer = Integer.parseInt(stdin.nextLine());
+                if (verifyIntegers(answer, 1, 2, 3, 4)) {
+                    break;
+                }
+            }
+
+            if (answer == 1) {
+                resetGame();
+                newGame();
+            } else if (answer == 2) {
+                help();
+            } else if (answer == 3) {
+                //TODO: highscores
+            } else if (answer == 3) {
+                inGame = false;
+            }
+        }
+    }
+
+    /**
+     * The following function verifies if a number is contained within a list of integers
+     *
+     * @return true or false
+     */
+    boolean verifyIntegers(int number, int... numbers) {
+        for (int element : numbers) {
+            if (number == element) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-    public void asciiArt(){
+    public void asciiArt() {
 
         System.out.println("88888888ba,                             88                                          88b           d88  88        88  88888888ba,                            _,.-------.,_                      ");
         System.out.println("88      `\"8b                            \"\"                                          888b         d888  88        88  88      `\"8b                       ,;~'             '~;,                      ");
@@ -71,20 +127,5 @@ public class Game {
         System.out.println("                                                                                                                                                                                                                              ");
 
 
-
-
-
-
-
-
-
-
     }
-
-
-
 }
-
-
-
-
