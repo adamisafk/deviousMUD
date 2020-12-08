@@ -1,6 +1,6 @@
 package org.example;
 
-public class item {
+public class Item {
     private String name;
     private String description;
     private Integer meleeDamage;
@@ -38,6 +38,6 @@ public class item {
         this.magicDamage = magicDamage;
     }
 
-    public item() {
+    public Item() {
     }
 }

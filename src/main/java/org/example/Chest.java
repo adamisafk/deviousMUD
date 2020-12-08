@@ -7,10 +7,6 @@ public class Chest {
     private String description;
     private Item itemCarried;
 
-    public Item getItem{} {
-        return null;
-    }
-
     public String getName() {
         return name;
     }
@@ -35,12 +31,7 @@ public class Chest {
         this.itemCarried = itemCarried;
     }
 
-    public item getGetItem() {
-        return getItem;
-    }
-
-    public void setGetItem(item getItem) {
-        this.getItem = getItem;
+    public Chest() {
     }
 }
 
