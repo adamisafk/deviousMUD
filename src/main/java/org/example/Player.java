@@ -11,7 +11,9 @@ public class Player {
     private int currentRoom;
 
     public void move(Direction direction) {
-        if(moveValidate(direction))
+        if(moveValidate(direction, this.currentRoom)){
+        //TODO: finish
+        }
     }
 
 
