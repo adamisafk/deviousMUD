@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.ArrayList;
 
+import org.example.entity.Room;
+
 public class Board {
     private Room[] roomArray;
 
