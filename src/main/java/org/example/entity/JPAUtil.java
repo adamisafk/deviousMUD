@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JPAUtil {
@@ -34,6 +35,21 @@ public class JPAUtil {
         JPAUtil.shutdown();
 
         return newRoom;
+    }
+
+    public static ArrayList<Room> getListOfRooms(){
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String hql = "FROM Room";
+        Query query = entityManager.createQuery(hql);
+        List results = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        JPAUtil.shutdown();
+
+        return new ArrayList<Room>(results);
     }
     public static NPC getNPC(int o) {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();

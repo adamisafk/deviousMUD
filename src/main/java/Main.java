@@ -1,5 +1,6 @@
 import org.example.Game;
 import org.example.entity.JPAUtil;
+import org.example.entity.Room;
 
 import java.util.*;
 
@@ -20,7 +21,13 @@ public class Main
 //        Room newRoom = JPAUtil.getRoom(1);
 //        System.out.println(newRoom.getName());
         //JPAUtil.setScore("Someone", 69);
-        int i = JPAUtil.getNoOfEntries("Room");
-        System.out.println(i);
+
+        ArrayList<Room> rooms = JPAUtil.getListOfRooms();
+
+
+        for (Room room : rooms) {
+            System.out.println(room.getName());
+        }
+
     }
 }

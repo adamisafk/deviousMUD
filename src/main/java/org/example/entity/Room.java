@@ -22,11 +22,6 @@ public class Room {
     @Column(name = "room_is_boss")
     private Boolean is_boss;
 
-    // TODO : Change this
-    private ArrayList<Item> items;
-    private ArrayList<NPC> npcs;
-    private ArrayList<Chest> chests;
-
     public Integer getId() {
         return id;
     }
@@ -74,7 +69,7 @@ public class Room {
     public void setIs_boss(Boolean is_boss) {
         this.is_boss = is_boss;
     }
-
+/*
     public void describeRoom() {
         System.out.printf("This room contains ");
         for (NPC npc : npcs
@@ -114,5 +109,6 @@ public class Room {
             }
         }
 
-    }
+
+    }*/
 }
