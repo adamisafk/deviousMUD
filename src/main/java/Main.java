@@ -1,8 +1,8 @@
+import org.example.Game;
 import org.example.JPAUtil;
 import org.example.Room;
 
 import javax.persistence.EntityManager;
-
 import java.util.*;
 
 public class Main
@@ -10,6 +10,8 @@ public class Main
     static Scanner stdin = new Scanner(System.in);
     public static void main(String[] args)
     {
+        Game game = new Game();
+        game.menu();
         System.out.print("Test");
 
 
