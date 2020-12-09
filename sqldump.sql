@@ -27,7 +27,9 @@ CREATE TABLE `Chest` (
   `chest_description` longtext,
   `chest_item` int DEFAULT NULL,
   `chest_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`chest_id`)
+  PRIMARY KEY (`chest_id`),
+  KEY `Chest_Item_item_id_fk` (`chest_item`),
+  CONSTRAINT `Chest_Item_item_id_fk` FOREIGN KEY (`chest_item`) REFERENCES `Item` (`item_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -84,7 +86,9 @@ CREATE TABLE `NPC` (
   `npc_is_friendly` bit(1) DEFAULT NULL,
   `npc_item_carried` int DEFAULT NULL,
   `npc_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`npc_id`)
+  PRIMARY KEY (`npc_id`),
+  KEY `NPC_Item_item_id_fk` (`npc_item_carried`),
+  CONSTRAINT `NPC_Item_item_id_fk` FOREIGN KEY (`npc_item_carried`) REFERENCES `Item` (`item_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -160,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-09 15:13:38
+-- Dump completed on 2020-12-09 16:04:30
