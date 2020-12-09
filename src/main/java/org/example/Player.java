@@ -96,7 +96,6 @@ public class Player {
             } else if (answer == 2) {
                 //  useEquippedSpell();
             }
-            }
             int damageDealt = 2;
             npc.setHealthValue(npc.getHealthValue() - damageDealt);
         }
