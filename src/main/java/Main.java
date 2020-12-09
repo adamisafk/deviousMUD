@@ -1,6 +1,7 @@
 import org.example.Game;
 import org.example.entity.JPAUtil;
 import org.example.entity.Room;
+import org.example.entity.Score;
 
 import java.util.*;
 
@@ -28,6 +29,5 @@ public class Main
         for (Room room : rooms) {
             System.out.println(room.getName());
         }
-
     }
 }

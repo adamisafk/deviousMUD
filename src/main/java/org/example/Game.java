@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.entity.JPAUtil;
+import org.example.entity.Score;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -69,6 +73,27 @@ public class Game {
     }
 
     /**
+     * Highscore function
+     */
+    public void showHighscores() {
+        ArrayList<Score> scores = JPAUtil.getScore();
+        String leftAlignFormat = "| %-5d | %-15s | %-10s |%n";
+        System.out.format("+--------------------------------------+%n");
+        System.out.format("｜ Rank ｜ Player Name    ｜ Gold Score ｜%n");
+        System.out.format("+--------------------------------------+%n");
+
+        int counter = 1;
+        for (Score score : scores) {
+            //System.out.println("｜ " + counter+1 + " ｜ " + score.getPlayerName() + " ｜ " + score.getScore() + " ｜");
+            System.out.format(leftAlignFormat, counter, score.getPlayerName(), score.getScore());
+            counter++;
+        }
+        System.out.format("+-------+-----------------+------------+%n");
+        System.out.println("Press enter to continue...");
+        stdin.nextLine();
+    }
+
+    /**
      * Menu function
      */
     public void menu() {
@@ -98,7 +123,7 @@ public class Game {
             } else if (answer == 2) {
                 help();
             } else if (answer == 3) {
-                //TODO: highscores
+                showHighscores();
             } else if (answer == 4) {
                 inGame = false;
             }
