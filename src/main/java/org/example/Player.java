@@ -80,32 +80,19 @@ public class Player {
         // calculate the damage to give to NPC
 
         if (result >= 10) {
-            System.out.println("Choose how would you like to attack: ");
-            System.out.printf("[1] Equipped Weapon");
-            System.out.println("[2] Equipped Spell");
-            int answer;
+            System.out.println("Would you like to equip a different item [y/n]?");
 
-            while (true) {
-                System.out.println("Please enter 1, 2");
-                answer = Integer.parseInt(stdin.nextLine());
-                if (verifyIntegers(answer, 1, 2)) {
-                    break;
-                }
+            String answer = stdin.nextLine();
+
+            if(answer.equals("y") || answer.equals("Y")){
+                equipItem();
             }
 
-            if (answer == 1) {
-            //    useEquippedWeapon();
-            } else if (answer == 2) {
-                //  useEquippedSpell();
-            }
             int damageDealt = 2;
             npc.setHealthValue(npc.getHealthValue() - damageDealt);
+
+            System.out.println("You dealt damage!");
         }
-
-        //TODO Implement Items in database
-
-
-        // update the variable this.healthValue
     }
 
     public void recieveHit(NPC npc) {
@@ -119,10 +106,8 @@ public class Player {
         if (result >= 15) {
             int damageDealt = 2;
             this.healthValue = healthValue - damageDealt;
-            //TODO Implement Items in database
+            System.out.println("You took damage!");
         }
-
-
     }
 
     public void swapItem(Item newItem) {
@@ -185,7 +170,7 @@ public class Player {
 
     public void displayItems(){
         for (int i = 0; i < itemCarried.size(); i++) {
-            System.out.printf("[%d] ---  %s",i + 1,itemCarried.get(i).getName());
+            System.out.printf("[%d] ---  %s \n",i + 1,itemCarried.get(i).getName());
         }
     }
 
