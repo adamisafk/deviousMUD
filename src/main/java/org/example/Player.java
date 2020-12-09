@@ -151,7 +151,9 @@ public class Player {
             System.out.println("Please select an item from your inventory");
             displayItems();
             int answer = Integer.parseInt(stdin.nextLine());
-            if (verifyIntegers(answer,1,2,3,4,5,6,7,8,9,10))
+            if (verifyIntegers(answer,1,2,3,4,5,6,7,8,9,10)){
+                break;
+            }
         }
     }
 
