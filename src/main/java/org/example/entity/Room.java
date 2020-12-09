@@ -40,7 +40,7 @@ public class Room {
     }
 
     public String getDescription() {
-        return description;
+        return description.replaceAll("  ", "\n");
     }
 
     // TODO: change this, so we can get the array of npcs in the room

@@ -35,7 +35,7 @@ public class NPC {
     }
 
     public String getDescription() {
-        return description;
+        return description.replaceAll("/\\s\\s+/g", "\n");
     }
     public void setDescription(String description) {
         this.description = description;
