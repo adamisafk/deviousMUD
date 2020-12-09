@@ -15,9 +15,27 @@ public class Game {
     }
 
     public void newGame() {
+        //main game loop
+        while(player.getHealthValue() == 10){
+
+            System.out.println("what would you like to do?");
+            String answer = stdin.nextLine();
+            if (answer.equals("move")){
+                System.out.println("Where to?");
+                answer = stdin.nextLine();
+                if(answer.equals("east")){
+                    player.move(Direction.E);
+                }
+            }
+            // print out the room description
+            System.out.println(player.getCurrentRoom());
+            System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getDescription());
+        }
     }
 
     public Game() {
+        gameBoard = new Board();
+        player = new Player();
     }
 
     public void help() {
