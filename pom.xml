@@ -19,8 +19,15 @@
             </plugin>
         </plugins>
     </build>
+         
+     <distributionManagement>
+        <repository>
+          <id>devMUD</id>
+          <name>deviousMUD</name>
+          <url>http://github.com/adamisafk/deviousMUD/releases</url>
+        </repository>
+    </distributionManagement>
 
-    <!-- May need to change version to 11 -->
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
