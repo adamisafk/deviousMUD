@@ -4,6 +4,7 @@ import org.example.entity.JPAUtil;
 import org.example.entity.Score;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Game {
@@ -27,7 +28,7 @@ public class Game {
             System.out.println("What would you like to do?");
             String answer = stdin.nextLine();
 
-            if (!evaluateInput(answer)){
+            if(!evaluateInput(answer)){
                 System.out.println("No progress was saved, thanks for playing.");
                 break;
             }  else if (player.getHealthValue() <= 0){
@@ -35,6 +36,18 @@ public class Game {
                 break;
             }
         }
+        // Save highscore
+        System.out.println("Would you like to save your score to the leaderboard? (Y/N)");
+        String choice = stdin.nextLine().toUpperCase();
+        if(choice.equals("Y")) {
+            System.out.println("Enter your name:");
+            String name = stdin.nextLine();
+            // Save
+            JPAUtil.setScore(name, player.getGoldCarried());
+            // TODO: Tell user what rank they were placed at
+            showHighscores();
+        }
+        resetGameWithCurrentStats(player);
     }
 
     /**
@@ -67,8 +80,7 @@ public class Game {
         // print out the room description
         System.out.println();
         System.out.println("The room you are in:");
-        System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getName());
-        System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getDescription());
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom());
         System.out.println();
     }
 
