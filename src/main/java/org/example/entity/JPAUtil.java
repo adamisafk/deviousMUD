@@ -12,9 +12,10 @@ public class JPAUtil {
     private static EntityManagerFactory factory;
 
     public static EntityManagerFactory getEntityManagerFactory() {
-
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-
+        if(factory == null) {
+            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            for (int i = 0; i < 50; ++i) System.out.println();
+        }
         return factory;
     }
     public static void shutdown() {
@@ -32,7 +33,6 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
 
         return newRoom;
     }
@@ -47,7 +47,7 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
+
 
         return new ArrayList<Room>(results);
     }
@@ -60,7 +60,7 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
+
 
         return newNPC;
     }
@@ -73,7 +73,7 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
+
 
         return newItem;
     }
@@ -86,7 +86,7 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
+
 
         return newChest;
     }
@@ -100,7 +100,7 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
+
 
         return new ArrayList<Score>(results);
     }
@@ -115,7 +115,7 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
+
     }
 
     public static Integer getNoOfEntries(String entity) {
@@ -127,7 +127,6 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-        JPAUtil.shutdown();
 
         return (int) query;
     }
