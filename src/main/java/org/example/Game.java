@@ -143,6 +143,9 @@ public class Game {
                     return playerBattle(npcToAttack);
                 }
                 break;
+            case "help":
+                help();
+                break;
             default:
                 System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
@@ -220,19 +223,25 @@ public class Game {
         boolean isPlayerTurn = true;
         while(player.getHealthValue() > 0 && gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(selectedRoomNpc-1) > 0){
             if(isPlayerTurn) {
+                for (int i = 0; i < 40; i++) {
+                    System.out.println();
+                }
                 int damageDealt = player.hit(npc);
                 selectedNPChealth = selectedNPChealth - damageDealt;
                 gameBoard.setElementCorrespondingNPCHealth(selectedNPChealth, selectedRoomNpc - 1, player.getCurrentRoom());
                 isPlayerTurn = false;
             } else{
+                for (int i = 0; i < 40; i++) {
+                    System.out.println();
+                }
                 player.recieveHit(npc);
                 isPlayerTurn = true;
             }
             printSword();
-            System.out.println("***********************");
-            System.out.printf("Your health: %d \n", player.getHealthValue());
-            System.out.printf("%s health: %d \n", npc.getName(), gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(selectedRoomNpc-1));
-            System.out.println("***********************");
+            health("Your", player.getHealthValue());
+            System.out.println("----------------------------------------------------------------------------------------------------------");
+            health(npc.getName(), gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(selectedRoomNpc-1));
+            printSword2();
             System.out.println("Press enter to continue...");
             try
             {
@@ -409,9 +418,7 @@ public class Game {
     }
 
     public void printSword(){
-        for (int i = 0; i < 40; i++) {
-            System.out.println();
-        }
+
         System.out.println("                                                                                                                                                           ");
         System.out.println("                                                                                                                                     ");
         System.out.println("       ,_._._._._._._._._|__________________________________________________________,                                                               ");
@@ -420,24 +427,41 @@ public class Game {
         System.out.println("                                                                                                                                                   ");
     }
 
+    public void printSword2(){
+
+        System.out.println("                                                                                                                                                           ");
+        System.out.println("                                                                                                                                     ");
+        System.out.println("        ,________________________________________________________|_._._._._._._._._,                                                               ");
+        System.out.println("       /_________________________________________________________|_|_|_|_|_|_|_|_|_|                                                                    ");
+        System.out.println("                                                                 !                                                                       ");
+        System.out.println("                                                                                                                                                   ");
+    }
+
     public void printDoor(){
         for (int i = 0; i < 40; i++) {
             System.out.println();
         }
         System.out.println("========================================================================================================================");
-        System.out.println("              ______                                       ");
-        System.out.println("           ,-' ;  ! `-.                                       ");
-        System.out.println("          } :  !  :  . {                                    ");
-        System.out.println("         |_ ;   __:  ;  |                                    ");
-        System.out.println("         )| .  :)(.  !  |                                    ");
-        System.out.println("         |\"    (##)  _  |                                    ");
-        System.out.println("         |  :  ;`'  (_) (                                    ");
-        System.out.println("         |  :  :  .     |                                    ");
-        System.out.println("         )_ !  ,  ;  ;  |                                    ");
-        System.out.println("         || .  .  :  :  |                                    ");
-        System.out.println("         |\" .  |  :  .  |                                    ");
-        System.out.println("         |mt-2_;----.___|                                    ");
+        System.out.println("                                               ______                                       ");
+        System.out.println("                                            ,-' ;  ! `-.                                       ");
+        System.out.println("                                           } :  !  :  . {                                    ");
+        System.out.println("                                          |_ ;   __:  ;  |                                    ");
+        System.out.println("                                          )| .  :)(.  !  |                                    ");
+        System.out.println("                                          |\"    (##)  _  |                                    ");
+        System.out.println("                                          |  :  ;`'  (_) (                                    ");
+        System.out.println("                                          |  :  :  .     |                                    ");
+        System.out.println("                                          )_ !  ,  ;  ;  |                                    ");
+        System.out.println("                                          || .  .  :  :  |                                    ");
+        System.out.println("                                          |\" .  |  :  .  |                                    ");
+        System.out.println("                                          |mt-2_;----.___|                                    ");
         System.out.println("========================================================================================================================");
+    }
 
+    public void health(String name, int healthValue){
+        System.out.printf("                                   ,d88b.d88b,\n");
+        System.out.printf("                                   88888888888 \n");
+        System.out.printf("                                   `Y8888888Y'    %s  health : %d\n",name,healthValue);
+        System.out.printf("                                     `Y888Y'  \n");
+        System.out.printf("                                       `Y'    \n");
     }
 }
