@@ -118,6 +118,8 @@ public class JPAUtil {
 
     }
 
+
+
     public static Integer getNoOfEntries(String entity) {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
@@ -129,5 +131,19 @@ public class JPAUtil {
         entityManager.close();
 
         return (int) query;
+    }
+    public static ArrayList<Score> getRank(String name) {
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        String hql = "FROM Score s WHERE s.playerName = :name ORDER BY s.score DESC";
+        Query query = entityManager.createQuery(hql);
+        query.setParameter("name", name);
+        List results = query.getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return new ArrayList<Score>(results);
     }
 }
