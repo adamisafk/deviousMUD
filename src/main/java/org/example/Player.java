@@ -142,20 +142,32 @@ public class Player {
 
     public void setGoldCarried(int goldCarried) { this.goldCarried = goldCarried; }
 
-    public Item getItemCarried() { return itemCarried; }
-
-    public void setItemCarried(Item itemCarried) { this.itemCarried = itemCarried; }
-
     public int getCurrentRoom() { return currentRoom; }
 
     public void setCurrentRoom(int currentRoom) { this.currentRoom = currentRoom; }
+
+    public void equipItem(){
+        while (true){
+            System.out.println("Please select an item from your inventory");
+            displayItems();
+            int answer = Integer.parseInt(stdin.nextLine());
+            if (verifyIntegers(answer,1,2,3,4,5,6,7,8,9,10))
+        }
+    }
+
+    public void displayItems(){
+        for (int i = 0; i < itemCarried.size(); i++) {
+            System.out.printf("[%d] + %s",i + 1,itemCarried.get(i).getName());
+        }
+    }
+
 
     public Player() {
          this.currentRoom = 1;
          this.healthValue = 10;
          this.itemCarried = new ArrayList<>();
          //Make fists default weapon
-            itemCarried.add(JPAUtil.getItem())
+            itemCarried.add(JPAUtil.getItem(9));
     }
     /**
      * The following function verifies if a number is contained within a list of integers
