@@ -1,25 +1,51 @@
 package org.example;
 
 import org.example.entity.JPAUtil;
+import org.example.entity.NPC;
 import org.example.entity.Score;
 
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Class to represent the game.
+ */
 public class Game {
+    // utility attributes
     static Scanner stdin = new Scanner(System.in);
+    // other classes
     private Board gameBoard;
     private Player player;
+    // these are used for combat
+    private int selectedRoomNpc;
+    private int selectedNPChealth;
 
+    public Game() {
+        gameBoard = new Board();
+        selectedRoomNpc = 0;
+    }
 
+    /**
+     * Function to reset the game, resetting player stats too
+     */
     public void resetGame() {
         player = new Player();
+        gameBoard = new Board();
     }
 
+    /**
+     * Function to reset the game but maintain player's stats/ equipment
+     * @param player
+     */
     public void resetGameWithCurrentStats(Player player) {
+        gameBoard = new Board();
+        this.player = player;
     }
 
+    /**
+     * The main game loop
+     */
     public void newGame() {
 
         //main game loop
@@ -36,6 +62,7 @@ public class Game {
                 break;
             }
         }
+
         // Save highscore
         System.out.println("Would you like to save your score to the leaderboard? (Y/N)");
         String choice = stdin.nextLine().toUpperCase();
@@ -68,28 +95,117 @@ public class Game {
         } else if (userInput.equals("move south")){
             player.move(Direction.S);
             describeRoom();
-        } else if (userInput.equals("describe room")){
+        } else if (userInput.equals("examine room")){
             describeRoom();
         } else if (userInput.equals("inventory")){
             player.equipItem();
+        } else if (userInput.equals("attack")){
+            NPC npcToAttack = selectNPC();
+            if (npcToAttack != null) {
+                return playerBattle(npcToAttack);
+            }
         } else if (userInput.equals("quit")){
             return false;
         }
         return true;
     }
 
+    /**
+     * Function to describe the room that the player is in.
+     */
     public void describeRoom(){
         // print out the room description
         System.out.println();
         System.out.println("The room you are in:");
-        gameBoard.getRoomAtIndex(player.getCurrentRoom()).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom());
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom()-1);
         System.out.println();
     }
 
-    public Game() {
-        gameBoard = new Board();
+    /**
+     * Helper function to select an NPC in the player's current room
+     * @return the selected NPC
+     */
+    public NPC selectNPC(){
+        while(true) {
+            System.out.println("Which npc?");
+            listNPCs();
+            int selectedNPC;
+            String answer = stdin.nextLine();
+            if (isIntInRange(answer, gameBoard.getRoomNpcIds().get(player.getCurrentRoom()-1).size()) > 0) {
+
+                selectedNPC = isIntInRange(answer, gameBoard.getRoomNpcIds().get(player.getCurrentRoom()-1).size());
+                selectedNPChealth = gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(selectedNPC - 1);
+                if(selectedNPChealth > 0) {
+                    selectedRoomNpc = selectedNPC;
+                    return JPAUtil.getNPC(gameBoard.getRoomNpcIds().get(player.getCurrentRoom()-1).get(selectedNPC - 1));
+                } else{
+                    System.out.println("Selected NPC is dead.[q/exit to quit]");
+                }
+            } else if (answer.equals("q") || answer.equals("exit")) {
+                return null;
+            } else {
+                System.out.println("Please select a valid npc");
+            }
+        }
+
 
     }
+
+    /**
+     * Function to list the npcs in the current room of the player
+     */
+    public void listNPCs(){
+
+        for (int i = 0; i < gameBoard.getRoomNpcIds().get(player.getCurrentRoom()-1).size(); i++) {
+            int npcHealth = gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(i);
+            String npcName = JPAUtil.getNPC(gameBoard.getRoomNpcIds().get(player.getCurrentRoom()-1).get(i)).getName();
+            if(npcHealth > 0) {
+                System.out.printf("[%d] ---  %s \n", i + 1, npcName);
+            } else {
+                System.out.printf("[%d] ---  %s [DEAD] \n", i + 1, npcName);
+            }
+        }
+    }
+
+    /**
+     * Combat function
+     * @param npc
+     * @return true or false depending on whether the player wins or dies.
+     */
+    public boolean playerBattle(NPC npc){
+        System.out.println("In combat...");
+        boolean isPlayerTurn = true;
+        while(player.getHealthValue() > 0 && npc.getHealthValue() > 0){
+            if(isPlayerTurn) {
+                int damageDealt = player.hit(npc);
+                selectedNPChealth = selectedNPChealth - damageDealt;
+                gameBoard.setElementCorrespondingNPCHealth(selectedNPChealth, selectedRoomNpc - 1, player.getCurrentRoom());
+                isPlayerTurn = false;
+            } else{
+                player.recieveHit(npc);
+                isPlayerTurn = true;
+            }
+            System.out.println("***********************");
+            System.out.printf("Your health: %d \n", player.getHealthValue());
+            System.out.printf("%s health: %d \n", npc.getName(), gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(selectedRoomNpc-1));
+            System.out.println("***********************");
+            System.out.println("Press enter to continue...");
+            try
+            {
+                System.in.read();
+            }
+            catch(Exception ignored)
+            {}
+        }
+
+        if(player.getHealthValue() <= 0){
+            return false; // player lost
+        } else {
+            return true; // player wins
+        }
+    }
+
+
 
     public void help() {
         System.out.println("Welcome to Devious MUD, the aim of the game is to collect as much gold as possible, and to escape with your life.\n");
@@ -140,15 +256,16 @@ public class Game {
             System.out.println("[3] Highscores");
             System.out.println("[4] Quit");
 
-            int answer;
+            String input;
 
             while (true) {
                 System.out.println("Please enter 1, 2, 3, 4: ");
-                answer = Integer.parseInt(stdin.nextLine());
-                if (verifyIntegers(answer, 1, 2, 3, 4)) {
+                input = stdin.nextLine();
+                if (isIntInRange(input, 4)>0) {
                     break;
                 }
             }
+            int answer = isIntInRange(input, 4);
 
             if (answer == 1) {
                 resetGame();
@@ -175,6 +292,26 @@ public class Game {
             }
         }
         return false;
+    }
+
+    /**
+     * Functiopn returns the number if it is a valid inventory slot. otherwise returns negative number
+     * @param answer
+     * @param numberOfItemsInInventory
+     * @return number if it is positive and valid inventory slot, otherwise negative number
+     */
+    public int isIntInRange(String answer, int numberOfItemsInInventory){
+        int result;
+        try{
+            result = Integer.parseInt(answer);
+            if(result > 0 && result <= numberOfItemsInInventory){
+                return result;
+            } else{
+                return -1;
+            }
+        } catch (Exception e){
+            return -1;
+        }
     }
 
 

@@ -37,6 +37,7 @@ public class PlayerTest {
         assertEquals(1, player.isIntInRange("1", 1));
         assertEquals(-1, player.isIntInRange("3", 2));
         assertEquals(2, player.isIntInRange("2", 2));
+        assertEquals(-1, player.isIntInRange("0", 2));
         assertEquals(-1, player.isIntInRange("test", 2));
     }
 }

@@ -71,7 +71,19 @@ public class Player {
         return false;
     }
 
-    public void hit(NPC npc) {
+    /**
+     * returns the damage hit against an npc
+     * @param npc
+     * @return
+     */
+    public int hit(NPC npc) {
+        System.out.println("Would you like to equip a different item [y/n]?");
+
+        String answer = stdin.nextLine();
+
+        if(answer.equals("y") || answer.equals("Y")){
+            equipItem();
+        }
         // roll dice to determine the strength of the hit to the npc, separate function for this since we need it for recieve hit
         Random r = new Random();
 
@@ -80,19 +92,15 @@ public class Player {
         // calculate the damage to give to NPC
 
         if (result >= 10) {
-            System.out.println("Would you like to equip a different item [y/n]?");
 
-            String answer = stdin.nextLine();
-
-            if(answer.equals("y") || answer.equals("Y")){
-                equipItem();
-            }
 
             int damageDealt = 2;
             npc.setHealthValue(npc.getHealthValue() - damageDealt);
 
             System.out.println("You dealt damage!");
+            return damageDealt;
         }
+        return 0;
     }
 
     public void recieveHit(NPC npc) {

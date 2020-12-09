@@ -9,13 +9,16 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Board {
     private Room[] roomArray;
     private ArrayList<ArrayList<Integer>> roomNpcIds;
+    private ArrayList<ArrayList<Integer>> correspondingNPCHealth;
     private ArrayList<ArrayList<Integer>> roomChestIds;
 
     public Board(){
         generateBoard();
         roomNpcIds = new ArrayList<ArrayList<Integer>>();
+        correspondingNPCHealth = new ArrayList<ArrayList<Integer>>();
         roomChestIds = new ArrayList<ArrayList<Integer>>();
         generateRoomNPCIDs();
+        generateNPCHealth();
         generateRoomChestIDs();
     }
 
@@ -49,6 +52,23 @@ public class Board {
         }
     }
 
+
+    /**
+     * Function to store NPC health values in the correspond correspondingNPCHealth array
+     */
+    public void generateNPCHealth(){
+        int counter1 = 0;
+        for (ArrayList<Integer> npcsInRoom: roomNpcIds) {
+            correspondingNPCHealth.add(new ArrayList<>(npcsInRoom.size()));
+            int counter2 = 0;
+            for (Integer npcID: npcsInRoom) {
+                correspondingNPCHealth.get(counter1).add(JPAUtil.getNPC(npcsInRoom.get(counter2)).getHealthValue());
+                counter2++;
+            }
+            counter1++;
+        }
+    }
+
     /**
      * Function to generate a random selection of chest IDs. randomly generate between 1 and 2 chests
      */
@@ -70,6 +90,14 @@ public class Board {
 
     public ArrayList<ArrayList<Integer>> getRoomChestIds() {
         return roomChestIds;
+    }
+
+    public ArrayList<ArrayList<Integer>> getCorrespondingNPCHealth() {
+        return correspondingNPCHealth;
+    }
+
+    public void setElementCorrespondingNPCHealth(int value, int npcIndex, int currentRoom){
+        this.correspondingNPCHealth.get(currentRoom-1).set(npcIndex, value);
     }
 }
 
