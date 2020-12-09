@@ -95,8 +95,7 @@ public class NPC {
             if (answer == 1) {
                 System.out.println("I am a " + this.name);
             } else if (answer == 2) {
-                //TODO: Fix this
-                System.out.println(room.describeRoom());
+                room.describeRoom();
             } else if (answer == 3) {
                 System.out.println("The " + this.name + "says 'Goodbye'");
                 inDialogue = false;

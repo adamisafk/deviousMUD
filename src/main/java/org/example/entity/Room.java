@@ -69,10 +69,11 @@ public class Room {
     public void setIs_boss(Boolean is_boss) {
         this.is_boss = is_boss;
     }
-/*
+
     public void describeRoom() {
+        getDescription();
         System.out.printf("This room contains ");
-        for (NPC npc : npcs
+        /*for (NPC npc : npcs
         ) {
             System.out.println("NPC Name: ");
             System.out.println(npc.getName());
@@ -81,10 +82,10 @@ public class Room {
         ) {
             System.out.println("Item Name: ");
             System.out.println(item.getName());
-        }
+        }*/
 
     }
-
+/*
     public void describeNPCs() {
         System.out.println("NPCs in the room: ");
         for (NPC npc : npcs) {
@@ -111,4 +112,7 @@ public class Room {
 
 
     }*/
+    public NPC getNPC() {
+        return JPAUtil.getNPC(1);
+    }
 }
