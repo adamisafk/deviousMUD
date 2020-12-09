@@ -90,18 +90,19 @@ public class JPAUtil {
 
         return newChest;
     }
-    public static Score getScore(int o) {
+    public static ArrayList<Score> getScore() {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
 
-        // TODO: GET ALL SCORES
-        Score newScore = entityManager.find(Score.class, o);
+        String hql = "FROM Score s ORDER BY s.score DESC";
+        Query query = entityManager.createQuery(hql);
+        List results = query.getResultList();
 
         entityManager.getTransaction().commit();
         entityManager.close();
         JPAUtil.shutdown();
 
-        return newScore;
+        return new ArrayList<Score>(results);
     }
     public static void setScore(String playerName, int scoreValue) {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
