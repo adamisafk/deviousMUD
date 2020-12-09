@@ -70,6 +70,8 @@ public class Game {
             describeRoom();
         } else if (userInput.equals("describe room")){
             describeRoom();
+        } else if (userInput.equals("inventory")){
+            player.equipItem();
         } else if (userInput.equals("quit")){
             return false;
         }

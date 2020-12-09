@@ -14,8 +14,10 @@ public class Player {
     private int armourValue;
     private int goldCarried;
     private ArrayList<Item> itemCarried;
+    private int currentInventoryItem;
     private int currentRoom;
     static Scanner stdin = new Scanner(System.in);
+
 
     public void move(Direction direction) {
         if(moveValidate(direction, this.currentRoom)){
@@ -147,28 +149,53 @@ public class Player {
 
     public void equipItem(){
         while (true){
-            System.out.println("Please select an item from your inventory");
+            System.out.println("Please select an item from your inventory: ");
             displayItems();
-            int answer = Integer.parseInt(stdin.nextLine());
-            if (verifyIntegers(answer,1,2,3,4,5,6,7,8,9,10)){
+            String answer = stdin.nextLine();
+            if(isIntInRange(answer, itemCarried.size()) > 0){
+                this.currentInventoryItem = isIntInRange(answer, itemCarried.size()) - 1;
                 break;
+            } else {
+                System.out.println("Please select a valid inventory item");
             }
         }
     }
 
+    /**
+     * Functiopn returns the number if it is a valid inventory slot. otherwise returns negative number
+     * @param answer
+     * @param numberOfItemsInInventory
+     * @return number if it is positive and valid inventory slot, otherwise negative number
+     */
+    public int isIntInRange(String answer, int numberOfItemsInInventory){
+        int result;
+        try{
+            result = Integer.parseInt(answer);
+            if(result > 0 && result <= numberOfItemsInInventory){
+                return result;
+            } else{
+                return -1;
+            }
+        } catch (Exception e){
+            return -1;
+        }
+    }
+
+
+
     public void displayItems(){
         for (int i = 0; i < itemCarried.size(); i++) {
-            System.out.printf("[%d] + %s",i + 1,itemCarried.get(i).getName());
+            System.out.printf("[%d] ---  %s",i + 1,itemCarried.get(i).getName());
         }
     }
 
 
     public Player() {
-         this.currentRoom = 1;
-         this.healthValue = 10;
-         this.itemCarried = new ArrayList<>();
-         //Make fists default weapon
-            itemCarried.add(JPAUtil.getItem(9));
+     this.currentRoom = 1;
+     this.healthValue = 10;
+     this.itemCarried = new ArrayList<>();
+     //Make fists default weapon
+     itemCarried.add(JPAUtil.getItem(9));
     }
     /**
      * The following function verifies if a number is contained within a list of integers
