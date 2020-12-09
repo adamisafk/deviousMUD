@@ -90,9 +90,9 @@ public class Room {
         //TODO: loop over all NPCs in the room
         System.out.println("NPCs in the room: ");
         for (int npcID = 0; npcID < roomNpcIds.get(currentRoom).size(); npcID++) {
-            System.out.println("Name: ");
+            System.out.print("Name: ");
             System.out.println(getNPC(roomNpcIds.get(currentRoom).get(npcID)).getName());
-            System.out.println("Description: ");
+            System.out.print("Description: ");
             System.out.println(getNPC(roomNpcIds.get(currentRoom).get(npcID)).getDescription());
         }
     }
@@ -106,20 +106,16 @@ public class Room {
         //TODO: loop over all Chests in the room
         System.out.println("Chests in the room: ");
         for (int chestID = 0; chestID < roomChestIds.get(currentRoom).size(); chestID++) {
-            System.out.println("Name: ");
+            System.out.print("Name: ");
             System.out.println(getChest(roomChestIds.get(currentRoom).get(chestID)).getName());
-            System.out.println("Description: ");
+            System.out.print("Description: ");
             System.out.println(getChest(roomChestIds.get(currentRoom).get(chestID)).getDescription());
         }
     }
-    public void describeRoom(ArrayList<ArrayList<Integer>> roomNpcIds, ArrayList<ArrayList<Integer>> roomChestIds, int currentRoom) {
-        System.out.println("Name: ");
+    public void describeRoom(int currentRoom) {
+        System.out.print("Name: ");
         System.out.println(getName());
-        System.out.println("Description: ");
+        System.out.print("Description: ");
         System.out.println(getDescription());
-        System.out.println();
-        System.out.printf("This room contains: ");
-        describeNPCs(roomNpcIds, currentRoom);
-        describeChests(roomChestIds, currentRoom);
     }
 }

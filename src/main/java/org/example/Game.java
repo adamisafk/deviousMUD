@@ -12,7 +12,6 @@ public class Game {
     private Board gameBoard;
     private Player player;
 
-
     public void resetGame() {
         player = new Player();
     }
@@ -68,20 +67,23 @@ public class Game {
         } else if (userInput.equals("move south")){
             player.move(Direction.S);
             describeRoom();
-        } else if (userInput.equals("describe room")){
+        } else if (userInput.equals("examine room")){
             describeRoom();
         } else if (userInput.equals("quit")){
             return false;
+        } else if (userInput.equals("examine npc")) {
+            //TODO: Loop over npc array for current room and get user to select which npc to describe
+        } else if (userInput.equals("examine chest")) {
+            //TODO: Loop over chest array for current room and get user to select which npc to describe
         }
         return true;
     }
 
     public void describeRoom(){
         // print out the room description
-        System.out.println();
-        System.out.println("The room you are in:");
-        gameBoard.getRoomAtIndex(player.getCurrentRoom()).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom());
-        System.out.println();
+        System.out.println("=============================================================================================================================================");
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()).describeRoom(player.getCurrentRoom());
+        System.out.println("=============================================================================================================================================");
     }
 
     public Game() {
