@@ -1,15 +1,23 @@
 package org.example;
 
 import org.example.entity.Item;
+import org.example.entity.JPAUtil;
 import org.example.entity.NPC;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Player {
     private String name;
     private int healthValue;
     private int armourValue;
     private int goldCarried;
-    private Item itemCarried;
+    private ArrayList<Item> itemCarried;
+    private int currentInventoryItem;
     private int currentRoom;
+    static Scanner stdin = new Scanner(System.in);
+
 
     public void move(Direction direction) {
         if(moveValidate(direction, this.currentRoom)){
@@ -63,11 +71,51 @@ public class Player {
         return false;
     }
 
-    public void hit(NPC npc) {
+    /**
+     * returns the damage hit against an npc
+     * @param npc
+     * @return
+     */
+    public int hit(NPC npc) {
+        System.out.println("Would you like to equip a different item [y/n]?");
 
+        String answer = stdin.nextLine();
+
+        if(answer.equals("y") || answer.equals("Y")){
+            equipItem();
+        }
+        // roll dice to determine the strength of the hit to the npc, separate function for this since we need it for recieve hit
+        Random r = new Random();
+
+        int result = r.nextInt(20);
+        result = result + 1;
+        // calculate the damage to give to NPC
+
+        if (result >= 10) {
+
+
+            int damageDealt = 2;
+            npc.setHealthValue(npc.getHealthValue() - damageDealt);
+
+            System.out.println("You dealt damage!");
+            return damageDealt;
+        }
+        return 0;
     }
 
     public void recieveHit(NPC npc) {
+        // roll dice to determine the strength of the hit from the npc (same function as required in above)
+        Random r = new Random();
+
+        int result = r.nextInt(20);
+        result = result + 1;
+
+        // calculate the damage taken + update the variable npc.heathvalue
+        if (result >= 15) {
+            int damageDealt = 2;
+            this.healthValue = healthValue - damageDealt;
+            System.out.println("You took damage!");
+        }
     }
 
     public void swapItem(Item newItem) {
@@ -88,16 +136,78 @@ public class Player {
 
     public void setGoldCarried(int goldCarried) { this.goldCarried = goldCarried; }
 
-    public Item getItemCarried() { return itemCarried; }
-
-    public void setItemCarried(Item itemCarried) { this.itemCarried = itemCarried; }
-
     public int getCurrentRoom() { return currentRoom; }
 
     public void setCurrentRoom(int currentRoom) { this.currentRoom = currentRoom; }
 
+    public void equipItem(){
+        while (true){
+            System.out.println("Please select an item from your inventory: ");
+            displayItems();
+            String answer = stdin.nextLine();
+            if(isIntInRange(answer, itemCarried.size()) > 0){
+                this.currentInventoryItem = isIntInRange(answer, itemCarried.size()) - 1;
+                break;
+            } else {
+                System.out.println("Please select a valid inventory item");
+            }
+        }
+    }
+
+    /**
+     * Functiopn returns the number if it is a valid inventory slot. otherwise returns negative number
+     * @param answer
+     * @param numberOfItemsInInventory
+     * @return number if it is positive and valid inventory slot, otherwise negative number
+     */
+    public int isIntInRange(String answer, int numberOfItemsInInventory){
+        int result;
+        try{
+            result = Integer.parseInt(answer);
+            if(result > 0 && result <= numberOfItemsInInventory){
+                return result;
+            } else{
+                return -1;
+            }
+        } catch (Exception e){
+            return -1;
+        }
+    }
+
+
+
+    public void displayItems(){
+        for (int i = 0; i < itemCarried.size(); i++) {
+            System.out.printf("[%d] ---  %s \n",i + 1,itemCarried.get(i).getName());
+        }
+    }
+
+
     public Player() {
      this.currentRoom = 1;
      this.healthValue = 10;
+     this.itemCarried = new ArrayList<>();
+     //Make fists default weapon
+     itemCarried.add(JPAUtil.getItem(9));
     }
+    /**
+     * The following function verifies if a number is contained within a list of integers
+     *
+     * @return true or false
+     */
+    boolean verifyIntegers(int number, int... numbers) {
+        for (int element : numbers) {
+            if (number == element) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+
 }
+
