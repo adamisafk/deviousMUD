@@ -56,22 +56,30 @@ public class Game {
      * @return integer depending on user choice
      */
     public boolean evaluateInput(String userInput){
-        if(userInput.equals("move east")){
-            player.move(Direction.E);
-            describeRoom();
-        } else if (userInput.equals("move north")){
-            player.move(Direction.N);
-            describeRoom();
-        } else if (userInput.equals("move west")){
-            player.move(Direction.W);
-            describeRoom();
-        } else if (userInput.equals("move south")){
-            player.move(Direction.S);
-            describeRoom();
-        } else if (userInput.equals("describe room")){
-            describeRoom();
-        } else if (userInput.equals("quit")){
-            return false;
+        switch(userInput) {
+            case "move east":
+                player.move(Direction.E);
+                describeRoom();
+                break;
+            case "move west":
+                player.move(Direction.W);
+                describeRoom();
+                break;
+            case "move north":
+                player.move(Direction.N);
+                describeRoom();
+                break;
+            case "move south":
+                player.move(Direction.S);
+                describeRoom();
+                break;
+            case "describe room":
+                describeRoom();
+                break;
+            case "quit":
+                return false;
+            default:
+                System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
         return true;
     }
