@@ -92,14 +92,32 @@ public class Game {
     }
 
     public void help() {
-        System.out.println("Welcome to Devious MUD, the aim of the game is to collect as much gold as possible, and to escape with your life.\n");
-        System.out.println("In order to play the game you will need to use these commands");
-        System.out.println("To EXAMINE an object or a room, type 'examine' before the name of the object or room you wish to examine");
-        System.out.println("To MOVE to a room, type 'move' before the direction (north, south, east, west) of the room you wish to move to");
-        System.out.println("To ATTACK a NPC, type 'attack', you'll then be asked which npc you would like to attack");
-        System.out.println("To GRAB an item, type 'grab' before the name of the item you wish to grab");
-        System.out.println("To VIEW INVENTORY, type 'inventory'");
-    }
+        System.out.println("  d888888b   d8b   db  .d8888.     ()     d8888b.  db    db   .o88b.     ()     d888888b   .d88b.   d8b   db  .d8888.                                                            ");
+        System.out.println("     `88'    888o  88  88'  YP  o~~88~~o  88  `8D  88    88  d8P  Y8  o~~88~~o    `88'    .8P  Y8.  888o  88  88'  YP                                  ,-.                              ");
+        System.out.println("      88     88V8o 88  `8bo.       ||     88oobY'  88    88  8P          ||        88     88    88  88V8o 88  `8bo                ___,---.__          /'|`\\          __,---,___         ");
+        System.out.println("      88     88 V8o88    `Y8b.     ||     88`8b    88    88  8b          ||        88     88    88  88 V8o88    `Y8b.          ,-'    \\`    `-.____,-'  |  `-.____,-'     /    `-.                  ");
+        System.out.println("     .88.    88  V888  db   8D     ||     88 `88.  88b  d88  Y8b  d8     ||       .88.    `8b  d8'  88  V888  db   8D        ,'        |           ~'\\     /`~           |        `.                 ");
+        System.out.println("   Y888888P  VP   V8P  `8888Y'     \\/     88   YD  ~Y8888P'   `Y88P'     \\/     Y888888P   `Y88P'   VP   V8P  `8888Y'        /      ___//              `. ,'          ,  , \\___      \\                ");
+        System.out.println("                                                                                                                            |    ,-'   `-.__   _         |        ,    __,-'   `-.    |                 ");
+        System.out.println("                                                                                                                            |   /          /\\_  `   .    |    ,      _ /          \\   |                                                             ");
+        System.out.println("+-------------------------------------------------------------------------------------------------------------------------+ \\  |           \\ \\`-.___ \\   |   / ___,-'/ /           |  /                                                              ");
+        System.out.println("|X| Welcome to Devious MUD, the aim of the game is to collect as much gold as possible, and to escape with your life.   |X|  \\  \\           | `._   `\\\\  |  //'   _,' |           /  /                                                           ");
+        System.out.println("|X|                                                                                                                     |X|    `-.\\         /'  _ `---'' , . ``---' _  `\\         /,-'                                                                    ");
+        System.out.println("|X| In order to play the game you will need to use these commands                                                       |X|                /      \\  ,='/ \\`=.    /     \\                                                                        ");
+        System.out.println("|X| To EXAMINE an object or a room, type 'examine' before the name of the object or room you wish to examine            |X|                |__   /|\\_,--.,-.--,--._/|\\  __|          ");
+        System.out.println("|X| To MOVE to a room, type 'move' before the direction (north, south, east, west) of the room you wish to move to      |X|               /  `./  \\\\`\\ |  |  | /,//' \\,'  \\       ");
+        System.out.println("|X| To ATTACK a NPC, type 'attack', you'll then be asked which npc you would like to attack                             |X|              /   /     ||--+--|--+-/-|     \\   \\         ");
+        System.out.println("|X| To GRAB an item, type 'grab' before the name of the item you wish to grab                                           |X|             |   |     /'\\_\\_\\ | /_/_/`\\     |  |       ");
+        System.out.println("|X| To VIEW INVENTORY, type 'inventory'                                                                                 |X|              \\   \\__, \\_     `~'     _/ .__/   /        ");
+        System.out.println("+-------------------------------------------------------------------------------------------------------------------------+               '-._,-'   `-._______,-'   `-._,-'            ");
+        System.out.println("Press enter to continue...");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception ignored)
+        {}
+}
 
     /**
      * Highscore function
@@ -131,14 +149,10 @@ public class Game {
      */
     public void menu() {
         boolean inGame = true;
-        asciiArt();
+
         while (inGame) {
 
-            System.out.println("Please select an option: ");
-            System.out.println("[1] Start new game");
-            System.out.println("[2] Help");
-            System.out.println("[3] Highscores");
-            System.out.println("[4] Quit");
+            asciiArt();
 
             int answer;
 
@@ -179,7 +193,7 @@ public class Game {
 
 
     public void asciiArt() {
-
+        System.out.println(" ");
         System.out.println("88888888ba,                             88                                          88b           d88  88        88  88888888ba,                            _,.-------.,_                      ");
         System.out.println("88      `\"8b                            \"\"                                          888b         d888  88        88  88      `\"8b                       ,;~'             '~;,                      ");
         System.out.println("88        `8b                                                                       88`8b       d8'88  88        88  88        `8b                    ,;                     ;,                                         ");
@@ -189,20 +203,20 @@ public class Game {
         System.out.println("88      .a8P   \"8b,   ,aa    `8b,d8'    88  \"8a,   ,a8\"  \"8a,   ,a88  aa    ]8I     88    `888'    88  Y8a.    .a8P  88      .a8P                  ; ;      .           .      ; ;                                         ");
         System.out.println("88888888Y\"'     `\"Ybbd8\"'      \"8\"      88   `\"YbbdP\"'    `\"YbbdP'Y8  `\"YbbdP\"'     88     `8'     88   `\"Y8888Y\"'   88888888Y\"'                   | ;   ______       ______   ; |                                             ");
         System.out.println("                                                                                                                                                   |  `/~\\\"     ~\" . \"~     \"~\\' |                                                                          ");
-        System.out.println("                                                                                                                                                   |  ~  ,-~~~^~, | ,~^~~~-,  ~  |                                                                            ");
-        System.out.println("                                                                                                                                                    |   |        }:{        |   |                                                                       ");
-        System.out.println("                                                                                                                                                    |   l       / | \\       !   |                                                                       ");
-        System.out.println("                                                                                                                                                     .~  (__,.--\" .^. \"--.,__)  ~.                                                                   ");
-        System.out.println("                                                                                                                                                    |     ---;' / | \\ `;---     |                                                                  ");
-        System.out.println("                                                                                                                                                    \\__.      \\/^\\/ \\/^\\     .__/                                                                      ");
-        System.out.println("                                                                                                                                                      V| \\                 / |V                                                                       ");
-        System.out.println("                                                                                                                                                        | |T~\\___!___!___/~T| |                                                                    ");
-        System.out.println("                                                                                                                                                        | |`IIII_I_I_I_IIII'| |                                                                 ");
-        System.out.println("                                                                                                                                                        |  \\,III I I I III,/  |                                                                     ");
-        System.out.println("                                                                                                                                                         \\   `~~~~~~~~~~'    /                                                                 ");
-        System.out.println("                                                                                                                                                          \\   .       .     /                                                                   ");
-        System.out.println("                                                                                                                                                             \\.    ^    . /                                                                ");
-        System.out.println("                                                                                                                                                                ^~~~^~~~^                                                             ");
+        System.out.println("   ________________________________                                                                                                                |  ~  ,-~~~^~, | ,~^~~~-,  ~  |                                                                            ");
+        System.out.println("   |X| Please select an option: |X|                                                                                                                 |   |        }:{        |     |                                                                       ");
+        System.out.println("   |X|    [1] Start new game    |X|    >>------>                                                                                                   |   l       / | \\       !     |                                                                       ");
+        System.out.println("   |X|    [2] Help              |X|    >>------>          ,_._._._._._._._._|__________________________________________________________,           .~  (__,.--\" .^. \"--.,__)   ~.                                                                   ");
+        System.out.println("   |X|    [3] Highscores        |X|    >>------>          |_|_|_|_|_|_|_|_|_|_________________________________________________________/            |     ---;' / | \\ `;---       |                                                                  ");
+        System.out.println("   |X|    [4] Quit              |X|    >>------>                            !                                                                       \\__.      \\/^\\/ \\/^\\     .__/                                                                      ");
+        System.out.println("   |X|                          |X|                                                                                                                   V| \\                 / |V                                                                       ");
+        System.out.println("   |X|--------------------------|X|                                                                                                                   | |T~\\___!___!___/~T| |                                                                    ");
+        System.out.println("   |X|                          |X|                                                                                                                   | |`IIII_I_I_I_IIII'| |                                                                 ");
+        System.out.println("   |X|--------------------------|X|                                                                                                                   |  \\,III I I I III,/  |                                                                     ");
+        System.out.println("                                                                                                                                                       \\    `~~~~~~~~~~'    /                                                                 ");
+        System.out.println("                                                                                                                                                         \\   .       .     /                                                                   ");
+        System.out.println("                                                                                                                                                           \\.    ^     . /                                                                ");
+        System.out.println("                                                                                                                                                              ^~~~^~~~^                                                             ");
 
 
     }
