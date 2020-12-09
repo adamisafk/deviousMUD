@@ -183,7 +183,7 @@ public class Game {
     public boolean playerBattle(NPC npc){
         System.out.println("In combat...");
         boolean isPlayerTurn = true;
-        while(player.getHealthValue() > 0 && npc.getHealthValue() > 0){
+        while(player.getHealthValue() > 0 && gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(selectedRoomNpc-1) > 0){
             if(isPlayerTurn) {
                 int damageDealt = player.hit(npc);
                 selectedNPChealth = selectedNPChealth - damageDealt;

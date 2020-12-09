@@ -95,7 +95,7 @@ public class Player {
 
 
             int damageDealt = 2;
-            npc.setHealthValue(npc.getHealthValue() - damageDealt);
+            //npc.setHealthValue(npc.getHealthValue() - damageDealt);
 
             System.out.println("You dealt damage!");
             return damageDealt;

@@ -9,6 +9,9 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+/**
+ * Tests to check that the JPAUtil class is working as expected.
+ */
 public class JPAUtilTest {
     @Test
     void testGetRoom() throws Exception{
