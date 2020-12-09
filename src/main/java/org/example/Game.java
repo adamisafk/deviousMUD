@@ -18,18 +18,32 @@ public class Game {
         //main game loop
         while(player.getHealthValue() == 10){
 
-            System.out.println("what would you like to do?");
+            System.out.println("What would you like to do?");
             String answer = stdin.nextLine();
-            if (answer.equals("move")){
-                System.out.println("Where to?");
-                answer = stdin.nextLine();
-                if(answer.equals("east")){
-                    player.move(Direction.E);
-                }
-            }
+            evaluateInput(answer);
+
             // print out the room description
-            System.out.println(player.getCurrentRoom());
+            System.out.println();
+            System.out.println("The room you are in:");
             System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getDescription());
+            System.out.println();
+        }
+    }
+
+    /**
+     * Function to evaluate the user inputted string.
+     * @param userInput
+     * @return integer depending on user choice
+     */
+    public void evaluateInput(String userInput){
+        if(userInput.equals("move east")){
+            player.move(Direction.E);
+        } else if (userInput.equals("move north")){
+            player.move(Direction.N);
+        } else if (userInput.equals("move west")){
+            player.move(Direction.W);
+        } else if (userInput.equals("move south")){
+            player.move(Direction.S);
         }
     }
 

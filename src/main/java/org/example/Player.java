@@ -13,12 +13,31 @@ public class Player {
 
     public void move(Direction direction) {
         if(moveValidate(direction, this.currentRoom)){
+            System.out.println("You see a door in front of you and try to open it. You turn an old rusty handle and with little effort the door opens.");
             if (this.currentRoom == 1 && direction == Direction.E){
-                this.currentRoom = 2;
+                setCurrentRoom(2);
             } else if (this.currentRoom == 1 && direction == Direction.S){
-                this.currentRoom = 3;
+                setCurrentRoom(3);
+            } else if (this.currentRoom == 2 && direction == Direction.S){
+                setCurrentRoom(4);
+            } else if (this.currentRoom == 2 && direction == Direction.W){
+                setCurrentRoom(1);
+            } else if (this.currentRoom == 3 && direction == Direction.N){
+                setCurrentRoom(1);
+            } else if (this.currentRoom == 3 && direction == Direction.E){
+                setCurrentRoom(4);
+            } else if (this.currentRoom == 4 && direction == Direction.E){
+                setCurrentRoom(4);
+            } else if (this.currentRoom == 4 && direction == Direction.N){
+                setCurrentRoom(2);
+            } else if (this.currentRoom == 4 && direction == Direction.W){
+                setCurrentRoom(3);
+            } else if (this.currentRoom == 5 && direction == Direction.W){
+                setCurrentRoom(4);
             }
-            //TODO: finish this
+        } else {
+            System.out.println("You see a door in front of you and try to open it. A flash of light appears and you find \n " +
+                    "yourself being pushed back by some sort of invisible force, you must find another way to get to your desired destination.");
         }
     }
 
