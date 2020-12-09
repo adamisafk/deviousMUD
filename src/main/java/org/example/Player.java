@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.entity.Item;
 import org.example.entity.NPC;
+import java.util.Random;
 
 public class Player {
     private String name;
@@ -64,10 +65,37 @@ public class Player {
     }
 
     public void hit(NPC npc) {
+        // roll dice to determine the strength of the hit from the npc, separate function for this since we need it for recieve hit
+        Random r = new Random();
 
+        int result = r.nextInt(20);
+        result = result + 1;
+        // calculate the damage taken
+
+        if (result >= 10) {
+            int damageDealt = 2;
+            npc.setHealthValue(npc.getHealthValue() - damageDealt);
+        }
+
+        //TODO Implement Items in database
+
+
+        // update the variable this.healthValue
     }
 
     public void recieveHit(NPC npc) {
+        // roll dice to determine the strength of the hit from the npc (same function as required in above)
+        Random r = new Random();
+
+        int result = r.nextInt(20);
+        result = result + 1;
+
+        // calculate the damage taken + update the variable npc.heathvalue
+        if (result >= 15) {
+            int damageDealt = 2;
+            this.healthValue = healthValue - damageDealt;
+            //TODO Implement Items in database
+        }
 
     }
 
