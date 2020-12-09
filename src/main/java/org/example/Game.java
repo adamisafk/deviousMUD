@@ -98,13 +98,17 @@ public class Game {
 
         int counter = 1;
         for (Score score : scores) {
-            //System.out.println("｜ " + counter+1 + " ｜ " + score.getPlayerName() + " ｜ " + score.getScore() + " ｜");
             System.out.format(leftAlignFormat, counter, score.getPlayerName(), score.getScore());
             counter++;
         }
         System.out.format("+-------+-----------------+------------+%n");
         System.out.println("Press enter to continue...");
-        stdin.nextLine();
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception ignored)
+        {}
     }
 
     /**
