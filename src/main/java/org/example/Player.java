@@ -13,7 +13,12 @@ public class Player {
 
     public void move(Direction direction) {
         if(moveValidate(direction, this.currentRoom)){
-            //TODO: finish
+            if (this.currentRoom == 1 && direction == Direction.E){
+                this.currentRoom = 2;
+            } else if (this.currentRoom == 1 && direction == Direction.S){
+                this.currentRoom = 3;
+            }
+            //TODO: finish this
         }
     }
 
@@ -74,6 +79,7 @@ public class Player {
     public void setCurrentRoom(int currentRoom) { this.currentRoom = currentRoom; }
 
     public Player() {
-
+     this.currentRoom = 1;
+     this.healthValue = 10;
     }
 }

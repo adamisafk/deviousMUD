@@ -24,12 +24,10 @@ DROP TABLE IF EXISTS `Chest`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Chest` (
   `chest_id` int NOT NULL AUTO_INCREMENT,
-  `chest_name` text NOT NULL,
-  `chest_description` text NOT NULL,
-  `chest_item` int NOT NULL,
-  PRIMARY KEY (`chest_id`),
-  KEY `Chest_Item_item_id_fk` (`chest_item`),
-  CONSTRAINT `Chest_Item_item_id_fk` FOREIGN KEY (`chest_item`) REFERENCES `Item` (`item_id`)
+  `chest_description` varchar(255) DEFAULT NULL,
+  `chest_item` int DEFAULT NULL,
+  `chest_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`chest_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,16 +75,14 @@ DROP TABLE IF EXISTS `NPC`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `NPC` (
   `npc_id` int NOT NULL AUTO_INCREMENT,
-  `npc_name` text NOT NULL,
-  `npc_description` text NOT NULL,
-  `npc_is_friendly` tinyint(1) NOT NULL DEFAULT '1',
-  `npc_health` int NOT NULL DEFAULT '100',
-  `npc_armour` int NOT NULL DEFAULT '10',
-  `npc_gold_carried` int NOT NULL DEFAULT '100',
-  `npc_item_carried` int NOT NULL,
-  PRIMARY KEY (`npc_id`),
-  KEY `NPC_Item_item_id_fk` (`npc_item_carried`),
-  CONSTRAINT `NPC_Item_item_id_fk` FOREIGN KEY (`npc_item_carried`) REFERENCES `Item` (`item_id`)
+  `npc_armour` int DEFAULT NULL,
+  `npc_description` varchar(255) DEFAULT NULL,
+  `npc_gold_carried` int DEFAULT NULL,
+  `npc_health` int DEFAULT NULL,
+  `npc_is_friendly` bit(1) DEFAULT NULL,
+  `npc_item_carried` int DEFAULT NULL,
+  `npc_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`npc_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -114,7 +110,7 @@ CREATE TABLE `Room` (
   `room_no_of_chests` int DEFAULT NULL,
   `room_no_of_npcs` int DEFAULT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +119,7 @@ CREATE TABLE `Room` (
 
 LOCK TABLES `Room` WRITE;
 /*!40000 ALTER TABLE `Room` DISABLE KEYS */;
-INSERT INTO `Room` (`room_id`, `room_description`, `room_is_boss`, `room_name`, `room_no_of_chests`, `room_no_of_npcs`) VALUES (1,'An abandoned city of Gods.',_binary '\0','Anor Londo',3,2);
+INSERT INTO `Room` (`room_id`, `room_description`, `room_is_boss`, `room_name`, `room_no_of_chests`, `room_no_of_npcs`) VALUES (1,'An abandoned city of Gods.',_binary '\0','Anor Londo',3,2),(2,'An overgrown cave.',_binary '\0','Grass Cave',3,2),(3,'A dirty bedroom with catgirl posters.',_binary '\0','Elliot\'s Bedroom',3,1),(4,'How did a water park get down here?',_binary '\0','Blizzard Beach',3,2),(5,'An abandoned tram line.',_binary '\0','King\'s Pass',3,2),(6,'A city which never stops raining.',_binary '\0','City of Tears',3,2),(7,'A lost kiln.',_binary '','The underworld.',3,2);
 /*!40000 ALTER TABLE `Room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +135,7 @@ CREATE TABLE `Score` (
   `player_name` text NOT NULL,
   `gold_score` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`score_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-08 11:48:29
+-- Dump completed on 2020-12-08 16:53:57
