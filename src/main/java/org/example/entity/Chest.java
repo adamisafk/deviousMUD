@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "Chest")
@@ -39,6 +40,14 @@ public class Chest {
 
     public Chest() {
     }
+
+    //TODO: need to find a way of getting item model from reference number
+    /*public void describeItem() {
+        System.out.println("You find a ");
+        System.out.println(item.getName() + ". ");
+        System.out.println(item.getDescription());
+    }*/
+
 }
 
 

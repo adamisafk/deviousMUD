@@ -1,8 +1,9 @@
 package org.example;
 
-import java.util.ArrayList;
-
+import org.example.entity.JPAUtil;
 import org.example.entity.Room;
+
+import java.util.ArrayList;
 
 public class Board {
     private Room[] roomArray;
@@ -12,23 +13,18 @@ public class Board {
     }
 
     /**
-     * Function to randomly generate the dungeon board. Specify the number of rooms
-     * naming convention for the rooms :
-     *
-     *  |     1       |       2        |
-     *  |     3       |       4        |      boss room      | (for now)
-     *
-     *
+     * Function to generate the board.
      */
     public void generateBoard(){
+        ArrayList<Room> roomsInDatabase = JPAUtil.getListOfRooms();
         this.roomArray = new Room[5];
-
-        for (int i = 0; i < 4; i++) {
-            //TODO: set rooms to random rooms from the database
+        for (int i = 0; i < 5; i++) {
+            roomArray[i] = (Room) roomsInDatabase.toArray()[i];
         }
+    }
 
-        // TODO: set the final room to a boss room.
-
+    public Room getRoomAtIndex(int i){
+        return roomArray[i];
     }
 
 }
