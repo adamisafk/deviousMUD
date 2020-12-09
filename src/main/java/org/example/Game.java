@@ -17,7 +17,7 @@ public class Game {
     // other classes
     private Board gameBoard;
     private Player player;
-    // these are used for combat
+    // these are used for keeping track of combat stats
     private int selectedRoomNpc;
     private int selectedNPChealth;
 
@@ -47,6 +47,31 @@ public class Game {
      * The main game loop
      */
     public void newGame() {
+        System.out.println("\n\n\n\n\n\n\n\n");
+        System.out.println("You open your eyes, and struggle to remember where you were before...");
+        System.out.println("[Press enter to continue]");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception ignored)
+        {}
+        System.out.println("... looking around you, you realise you are in a room....");
+        System.out.println("[Press enter]");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception ignored)
+        {}
+        System.out.println("Reaching into your pocket, you find a compass...");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception ignored)
+        {}
+        System.out.println("Examining the compass and the room, you realise that there are four doors in this room, each \naligned with the four cardinal directions on the compass, north, south east and west.\n");
 
         //main game loop
         while(true){
@@ -85,20 +110,24 @@ public class Game {
     public boolean evaluateInput(String userInput){
         switch(userInput) {
             case "move east":
+                printDoor();
                 player.move(Direction.E);
-                describeRoom();
+                currentRoomName();
                 break;
             case "move west":
+                printDoor();
                 player.move(Direction.W);
-                describeRoom();
+                currentRoomName();
                 break;
             case "move north":
+                printDoor();
                 player.move(Direction.N);
-                describeRoom();
+                currentRoomName();
                 break;
             case "move south":
+                printDoor();
                 player.move(Direction.S);
-                describeRoom();
+                currentRoomName();
                 break;
             case "examine room":
                 describeRoom();
@@ -107,11 +136,13 @@ public class Game {
                 return false;
             case "inventory":
                 player.equipItem();
+                break;
             case "attack":
                 NPC npcToAttack = selectNPC();
                 if (npcToAttack != null) {
                     return playerBattle(npcToAttack);
                 }
+                break;
             default:
                 System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
@@ -124,9 +155,13 @@ public class Game {
     public void describeRoom(){
         // print out the room description
         System.out.println();
-        System.out.println("The room you are in:");
         gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom()-1);
         System.out.println();
+    }
+
+    public void currentRoomName(){
+        System.out.println("You examine the room around you... its name is....");
+        System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).getName());
     }
 
     /**
@@ -193,6 +228,7 @@ public class Game {
                 player.recieveHit(npc);
                 isPlayerTurn = true;
             }
+            printSword();
             System.out.println("***********************");
             System.out.printf("Your health: %d \n", player.getHealthValue());
             System.out.printf("%s health: %d \n", npc.getName(), gameBoard.getCorrespondingNPCHealth().get(player.getCurrentRoom()-1).get(selectedRoomNpc-1));
@@ -216,6 +252,9 @@ public class Game {
 
 
     public void help() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println();
+        }
         System.out.println("  d888888b   d8b   db  .d8888.     ()     d8888b.  db    db   .o88b.     ()     d888888b   .d88b.   d8b   db  .d8888.                                                            ");
         System.out.println("     `88'    888o  88  88'  YP  o~~88~~o  88  `8D  88    88  d8P  Y8  o~~88~~o    `88'    .8P  Y8.  888o  88  88'  YP                                  ,-.                              ");
         System.out.println("      88     88V8o 88  `8bo.       ||     88oobY'  88    88  8P          ||        88     88    88  88V8o 88  `8bo                ___,---.__          /'|`\\          __,---,___         ");
@@ -241,7 +280,7 @@ public class Game {
         }
         catch(Exception ignored)
         {}
-}
+    }
 
     /**
      * Highscore function
@@ -338,6 +377,9 @@ public class Game {
 
 
     public void asciiArt() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println();
+        }
         System.out.println(" ");
         System.out.println("88888888ba,                             88                                          88b           d88  88        88  88888888ba,                            _,.-------.,_                      ");
         System.out.println("88      `\"8b                            \"\"                                          888b         d888  88        88  88      `\"8b                       ,;~'             '~;,                      ");
@@ -363,6 +405,39 @@ public class Game {
         System.out.println("                                                                                                                                                           \\.    ^     . /                                                                ");
         System.out.println("                                                                                                                                                              ^~~~^~~~^                                                             ");
 
+
+    }
+
+    public void printSword(){
+        for (int i = 0; i < 40; i++) {
+            System.out.println();
+        }
+        System.out.println("                                                                                                                                                           ");
+        System.out.println("                                                                                                                                     ");
+        System.out.println("       ,_._._._._._._._._|__________________________________________________________,                                                               ");
+        System.out.println("       |_|_|_|_|_|_|_|_|_|_________________________________________________________/                                                                    ");
+        System.out.println("                         !                                                                                                                                  ");
+        System.out.println("                                                                                                                                                   ");
+    }
+
+    public void printDoor(){
+        for (int i = 0; i < 40; i++) {
+            System.out.println();
+        }
+        System.out.println("========================================================================================================================");
+        System.out.println("              ______                                       ");
+        System.out.println("           ,-' ;  ! `-.                                       ");
+        System.out.println("          } :  !  :  . {                                    ");
+        System.out.println("         |_ ;   __:  ;  |                                    ");
+        System.out.println("         )| .  :)(.  !  |                                    ");
+        System.out.println("         |\"    (##)  _  |                                    ");
+        System.out.println("         |  :  ;`'  (_) (                                    ");
+        System.out.println("         |  :  :  .     |                                    ");
+        System.out.println("         )_ !  ,  ;  ;  |                                    ");
+        System.out.println("         || .  .  :  :  |                                    ");
+        System.out.println("         |\" .  |  :  .  |                                    ");
+        System.out.println("         |mt-2_;----.___|                                    ");
+        System.out.println("========================================================================================================================");
 
     }
 }
