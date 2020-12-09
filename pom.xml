@@ -24,7 +24,7 @@
         <repository>
           <id>devMUD</id>
           <name>deviousMUD</name>
-          <url>http://github.com/adamisafk/deviousMUD/releases</url>
+          <url>https://maven.pkg.github.com/adamisafk/deviousMUD</url>
         </repository>
     </distributionManagement>
 
