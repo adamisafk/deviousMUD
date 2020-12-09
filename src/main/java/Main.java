@@ -12,7 +12,6 @@ public class Main
     {
         Game game = new Game();
         game.menu();
-        System.out.print("Test");
 
 
         ormTest();
