@@ -32,7 +32,7 @@ public class Game {
         System.out.println("To GRAB an item, type 'grab' before the name of the item you wish to grab\n");
 
         System.out.println("You can test these commands here, and then type 'exit' when you're done");
-        System.out.println("Object: box, NPC: man, Item: sword");
+        System.out.println("Object: box\n NPC: man\n Item: sword\n");
 
         do {
             userInput = stdin.nextLine();

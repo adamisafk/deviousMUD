@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import javax.persistence.*;
@@ -86,9 +87,10 @@ public class NPC {
         boolean inDialogue = true;
         while (inDialogue) {
             System.out.println("What would you like to say to the character?");
-            System.out.println("[1] What's your name?");
+            System.out.println("[1] What are you?");
             System.out.println("[2] What's in this room?");
             System.out.println("[3] I have nothing more to say");
+            System.out.println("[4] Attack");
             int answer = Integer.parseInt(stdin.nextLine());
             if (answer == 1) {
                 System.out.println("I am a " + this.name);
@@ -96,7 +98,11 @@ public class NPC {
                 //TODO: Fix this
                 System.out.println(room.describeRoom());
             } else if (answer == 3) {
+                System.out.println("The " + this.name + "says 'Goodbye'");
                 inDialogue = false;
+            } else if (answer == 4) {
+                System.out.println("You have decided to attack the " + this.name + ", prepare yourself");
+                //TODO: Add attack NPC function
             }
         }
 
