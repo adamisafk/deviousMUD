@@ -5,7 +5,7 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
         version="2.1">
     <persistence-unit name="PERSISTENCE">
-        <description> Hibernate JPA Configuration Example</description>
+        <description>Hibernate JPA Configuration Example</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.driver"

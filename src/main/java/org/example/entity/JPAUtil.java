@@ -14,6 +14,7 @@ public class JPAUtil {
     public static EntityManagerFactory getEntityManagerFactory() {
         if(factory == null) {
             factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            for (int i = 0; i < 50; ++i) System.out.println();
         }
         return factory;
     }
