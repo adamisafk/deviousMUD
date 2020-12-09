@@ -44,12 +44,12 @@ public class Room {
     }
 
     // TODO: change this, so we can get the array of npcs in the room
-    public NPC getNPC(){
-        return JPAUtil.getNPC(1);
+    public NPC getNPC(int id){
+        return JPAUtil.getNPC(id);
     }
 
-    public Chest getChest(){
-        return JPAUtil.getChest(1);
+    public Chest getChest(int id){
+        return JPAUtil.getChest(id);
     }
 
     public void setDescription(String description) {
@@ -80,39 +80,46 @@ public class Room {
         this.is_boss = is_boss;
     }
 
-    public void describeNPCs() {
+    /**
+     * Loop over the array of RoomNPCIDs, created in the board class. Print out the description
+     * corresponding to the entries in the database
+     * @param roomNpcIds
+     * @param currentRoom
+     */
+    public void describeNPCs(ArrayList<ArrayList<Integer>> roomNpcIds, int currentRoom) {
         //TODO: loop over all NPCs in the room
         System.out.println("NPCs in the room: ");
-        System.out.println("Name: ");
-        System.out.println(getNPC().getName());
-        System.out.println("Description: ");
-        System.out.println(getNPC().getDescription());
-
+        for (int npcID = 0; npcID < roomNpcIds.get(currentRoom).size(); npcID++) {
+            System.out.println("Name: ");
+            System.out.println(getNPC(roomNpcIds.get(currentRoom).get(npcID)).getName());
+            System.out.println("Description: ");
+            System.out.println(getNPC(roomNpcIds.get(currentRoom).get(npcID)).getDescription());
+        }
     }
 
-    public void describeChests() {
+    /**
+     * Loop over the roomChestIDs in the current room and print out the chests names and descriptions.
+     * @param roomChestIds
+     * @param currentRoom
+     */
+    public void describeChests(ArrayList<ArrayList<Integer>> roomChestIds, int currentRoom) {
         //TODO: loop over all Chests in the room
         System.out.println("Chests in the room: ");
-        System.out.println("Name: ");
-        System.out.println(getChest().getName());
-        System.out.println("Description: ");
-        System.out.println(getChest().getDescription());
+        for (int chestID = 0; chestID < roomChestIds.get(currentRoom).size(); chestID++) {
+            System.out.println("Name: ");
+            System.out.println(getChest(roomChestIds.get(currentRoom).get(chestID)).getName());
+            System.out.println("Description: ");
+            System.out.println(getChest(roomChestIds.get(currentRoom).get(chestID)).getDescription());
+        }
     }
-    public void describeRoom() {
+    public void describeRoom(ArrayList<ArrayList<Integer>> roomNpcIds, ArrayList<ArrayList<Integer>> roomChestIds, int currentRoom) {
         System.out.println("Name: ");
         System.out.println(getName());
         System.out.println("Description: ");
         System.out.println(getDescription());
         System.out.println();
-        System.out.printf("This room contains ");
-        describeNPCs();
-        describeChests();
+        System.out.printf("This room contains: ");
+        describeNPCs(roomNpcIds, currentRoom);
+        describeChests(roomChestIds, currentRoom);
     }
-
-
-/*
-
-
-
-    }*/
 }

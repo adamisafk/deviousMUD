@@ -80,7 +80,7 @@ public class Game {
         // print out the room description
         System.out.println();
         System.out.println("The room you are in:");
-        gameBoard.getRoomAtIndex(player.getCurrentRoom()).describeRoom();
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom());
         System.out.println();
     }
 
