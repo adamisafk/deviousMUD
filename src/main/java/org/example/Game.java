@@ -91,31 +91,13 @@ public class Game {
 
     public void help() {
 
-        String userInput;
-
         System.out.println("Welcome to Devious MUD, the aim of the game is to collect as much gold as possible, and to escape with your life.\n");
         System.out.println("In order to play the game you will need to use these commands");
         System.out.println("To EXAMINE an object or a room, type 'examine' before the name of the object or room you wish to examine");
-        System.out.println("To MOVE to a room, type 'move' before the direction (N,S,E,W) of the room you wish to move to");
-        System.out.println("To ATTACK a NPC, type 'attack' before the name of the NPC you wish to attack");
-        System.out.println("To GRAB an item, type 'grab' before the name of the item you wish to grab\n");
-
-        System.out.println("You can test these commands here, and then type 'exit' when you're done");
-        System.out.println("Object: box, NPC: man, Item: sword");
-
-        do {
-            userInput = stdin.nextLine();
-            if (userInput == "examine box") {
-                System.out.println("The box is damp and full of cobwebs, the outside is covered in mold and gives off a putrid stench");
-            } else if (userInput == "examine man"){
-                System.out.println("The man stands hunched over in the corner of the room, you can barely make out his face in the shadows");
-            } else if (userInput == "examine sword"){
-                System.out.println("This sword shines with the light from the room, despite the little amount there is.");
-            } else if (userInput == "move N") {
-
-            }
-        } while (!userInput.equals("exit") );
-
+        System.out.println("To MOVE to a room, type 'move' before the direction (north, south, east, west) of the room you wish to move to");
+        System.out.println("To ATTACK a NPC, type 'attack', you'll then be asked which npc you would like to attack");
+        System.out.println("To GRAB an item, type 'grab' before the name of the item you wish to grab");
+        System.out.println("To VIEW INVENTORY, type 'inventory'");
 
     }
 
