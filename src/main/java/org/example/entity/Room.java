@@ -3,6 +3,7 @@ package org.example.entity;
 import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.jar.JarEntry;
 
 @Entity
 @Table(name = "Room")
@@ -42,6 +43,15 @@ public class Room {
         return description;
     }
 
+    // TODO: change this, so we can get the array of npcs in the room
+    public NPC getNPC(){
+        return JPAUtil.getNPC(1);
+    }
+
+    public Chest getChest(){
+        return JPAUtil.getChest(1);
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -69,45 +79,39 @@ public class Room {
     public void setIs_boss(Boolean is_boss) {
         this.is_boss = is_boss;
     }
-/*
-    public void describeRoom() {
-        System.out.printf("This room contains ");
-        for (NPC npc : npcs
-        ) {
-            System.out.println("NPC Name: ");
-            System.out.println(npc.getName());
-        }
-        for (Item item : items
-        ) {
-            System.out.println("Item Name: ");
-            System.out.println(item.getName());
-        }
-
-    }
 
     public void describeNPCs() {
+        //TODO: loop over all NPCs in the room
         System.out.println("NPCs in the room: ");
-        for (NPC npc : npcs) {
-            System.out.println("Name");
-            System.out.println(npc.getName());
-            System.out.println("Description");
-            System.out.println(npc.getDescription());
-        }
+        System.out.println("Name: ");
+        System.out.println(getNPC().getName());
+        System.out.println("Description: ");
+        System.out.println(getNPC().getDescription());
+
     }
 
     public void describeChests() {
-        int i = 0;
-        System.out.println("In the corner there is a ");
-        for (Chest chest : chests) {
-            i = i + 1;
-            System.out.println(chest.getName());
-            System.out.println(chest.getDescription());
-            if (chests.size() != i) {
-                System.out.println(" In another part of the room there is a ");
-            } else {
-                System.out.println(". There are no other objects in the room");
-            }
-        }
+        //TODO: loop over all Chests in the room
+        System.out.println("Chests in the room: ");
+        System.out.println("Name: ");
+        System.out.println(getChest().getName());
+        System.out.println("Description: ");
+        System.out.println(getChest().getDescription());
+    }
+    public void describeRoom() {
+        System.out.println("Name: ");
+        System.out.println(getName());
+        System.out.println("Description: ");
+        System.out.println(getDescription());
+        System.out.println();
+        System.out.printf("This room contains ");
+        describeNPCs();
+        describeChests();
+    }
+
+
+/*
+
 
 
     }*/
