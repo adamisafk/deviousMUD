@@ -26,13 +26,12 @@ public class Game {
 
             System.out.println("What would you like to do?");
             String answer = stdin.nextLine();
-            evaluateInput(answer);
 
-            if(player.getHealthValue() <= 0){
-                System.out.println("You died.");
-                break;
-            }  else if (!evaluateInput(answer)){
+            if (!evaluateInput(answer)){
                 System.out.println("No progress was saved, thanks for playing.");
+                break;
+            }  else if (player.getHealthValue() <= 0){
+                System.out.println("You died.");
                 break;
             }
         }
