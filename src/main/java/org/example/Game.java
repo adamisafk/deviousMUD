@@ -13,24 +13,28 @@ public class Game {
 
 
     public void resetGame() {
+        player = new Player();
     }
 
     public void resetGameWithCurrentStats(Player player) {
     }
 
     public void newGame() {
+
         //main game loop
-        while(player.getHealthValue() == 10){
+        while(true){
 
             System.out.println("What would you like to do?");
             String answer = stdin.nextLine();
             evaluateInput(answer);
 
-            // print out the room description
-            System.out.println();
-            System.out.println("The room you are in:");
-            System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getDescription());
-            System.out.println();
+            if(player.getHealthValue() <= 0){
+                System.out.println("You died.");
+                break;
+            }  else if (!evaluateInput(answer)){
+                System.out.println("No progress was saved, thanks for playing.");
+                break;
+            }
         }
     }
 
@@ -39,21 +43,39 @@ public class Game {
      * @param userInput
      * @return integer depending on user choice
      */
-    public void evaluateInput(String userInput){
+    public boolean evaluateInput(String userInput){
         if(userInput.equals("move east")){
             player.move(Direction.E);
+            describeRoom();
         } else if (userInput.equals("move north")){
             player.move(Direction.N);
+            describeRoom();
         } else if (userInput.equals("move west")){
             player.move(Direction.W);
+            describeRoom();
         } else if (userInput.equals("move south")){
             player.move(Direction.S);
+            describeRoom();
+        } else if (userInput.equals("describe room")){
+            describeRoom();
+        } else if (userInput.equals("quit")){
+            return false;
         }
+        return true;
+    }
+
+    public void describeRoom(){
+        // print out the room description
+        System.out.println();
+        System.out.println("The room you are in:");
+        System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getName());
+        System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getDescription());
+        System.out.println();
     }
 
     public Game() {
         gameBoard = new Board();
-        player = new Player();
+
     }
 
     public void help() {

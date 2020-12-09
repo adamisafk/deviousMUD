@@ -68,8 +68,6 @@ public class Player {
     }
 
     public void recieveHit(NPC npc) {
-
-
     }
 
     public void swapItem(Item newItem) {
