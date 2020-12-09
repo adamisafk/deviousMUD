@@ -47,7 +47,10 @@ public class Game {
      * The main game loop
      */
     public void newGame() {
-        System.out.println("\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n");
+
+        skull();
+
         System.out.println("You open your eyes, and struggle to remember where you were before...");
         System.out.println("[Press enter to continue]");
         try
@@ -463,5 +466,33 @@ public class Game {
         System.out.printf("                                   `Y8888888Y'    %s  health : %d\n",name,healthValue);
         System.out.printf("                                     `Y888Y'  \n");
         System.out.printf("                                       `Y'    \n");
+    }
+
+    public void skull(){
+        System.out.println(" ");
+        System.out.println("                                                                         _,.-------.,_                      ");
+        System.out.println("                                                                     ,;~'             '~;,                      ");
+        System.out.println("                                                                   ,;                     ;,                                         ");
+        System.out.println("                                                                  ;                         ;                                             ");
+        System.out.println("                                                                 ,'                         ',                                            ");
+        System.out.println("                                                                ,;                           ;,                                            ");
+        System.out.println("                                                                ; ;      .           .      ; ;                                         ");
+        System.out.println("                                                                | ;   ______       ______   ; |                                             ");
+        System.out.println("                                                                |  `/~\\\"     ~\" . \"~     \"~\\' |                                                                          ");
+        System.out.println("                                                                |  ~  ,-~~~^~, | ,~^~~~-,  ~  |                                                                            ");
+        System.out.println("                                                                |   |        }:{        |     |                                                                       ");
+        System.out.println("                                                                |   l       / | \\       !     |                                                                       ");
+        System.out.println("                                                                .~  (__,.--\" .^. \"--.,__)   ~.                                                                   ");
+        System.out.println("                                                                |     ---;' / | \\ `;---       |                                                                  ");
+        System.out.println("                                                                 \\__.      \\/^\\/ \\/^\\     .__/                                                                      ");
+        System.out.println("                                                                   V| \\                 / |V                                                                       ");
+        System.out.println("                                                                    | |T~\\___!___!___/~T| |                                                                    ");
+        System.out.println("                                                                    | |`IIII_I_I_I_IIII'| |                                                                 ");
+        System.out.println("                                                                    |  \\,III I I I III,/  |                                                                     ");
+        System.out.println("                                                                    \\    `~~~~~~~~~~'    /                                                                 ");
+        System.out.println("                                                                      \\   .       .     /                                                                   ");
+        System.out.println("                                                                        \\.    ^     . /                                                                ");
+        System.out.println("                                                                           ^~~~^~~~^                                                             ");
+
     }
 }
