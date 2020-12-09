@@ -1,10 +1,13 @@
 package org.example.entity;
 
+import java.util.Scanner;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "NPC")
 public class NPC {
+    static Scanner stdin = new Scanner(System.in);
     @Id
     @Column(name = "npc_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,5 +80,25 @@ public class NPC {
     }
 
     public NPC() {
+    }
+
+    public void converseWith(Room room) {
+        boolean inDialogue = true;
+        while (inDialogue) {
+            System.out.println("What would you like to say to the character?");
+            System.out.println("[1] What's your name?");
+            System.out.println("[2] What's in this room?");
+            System.out.println("[3] I have nothing more to say");
+            int answer = Integer.parseInt(stdin.nextLine());
+            if (answer == 1) {
+                System.out.println("I am a " + this.name);
+            } else if (answer == 2) {
+                //TODO: Fix this
+                System.out.println(room.describeRoom());
+            } else if (answer == 3) {
+                inDialogue = false;
+            }
+        }
+
     }
 }
