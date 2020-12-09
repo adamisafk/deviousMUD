@@ -135,7 +135,7 @@ CREATE TABLE `Score` (
   `player_name` text NOT NULL,
   `gold_score` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`score_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +144,7 @@ CREATE TABLE `Score` (
 
 LOCK TABLES `Score` WRITE;
 /*!40000 ALTER TABLE `Score` DISABLE KEYS */;
+INSERT INTO `Score` (`score_id`, `player_name`, `gold_score`) VALUES (3,'Player 1',300),(4,'Player 2',150),(5,'Player 3',600),(6,'Player 4',200);
 /*!40000 ALTER TABLE `Score` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -156,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-08 16:53:57
+-- Dump completed on 2020-12-09 10:23:02
