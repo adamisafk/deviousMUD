@@ -23,6 +23,17 @@ public class Board {
     }
 
     /**
+     * Alternative constructor used for testing
+     * @param i any integer
+     */
+    public Board(int i){
+        generateBoard();
+        roomNpcIds = new ArrayList<ArrayList<Integer>>();
+        correspondingNPCHealth = new ArrayList<ArrayList<Integer>>();
+        roomChestIds = new ArrayList<ArrayList<Integer>>();
+    }
+
+    /**
      * Function to generate the board.
      */
     public void generateBoard(){
@@ -38,9 +49,10 @@ public class Board {
     }
 
     /**
-     * Function to generate a random selection of NPC IDs. randomly generate between 1 and 3 npcs
+     * Function to generate a random selection of NPC IDs. randomly generate between 1 and 3 npcs per room
+     * The first index corresponds to the room, second to the id of the npc
      */
-    public void generateRoomNPCIDs(){
+    public ArrayList<ArrayList<Integer>> generateRoomNPCIDs(){
         for (int i = 0; i < roomArray.length; i++) {
             // generate random number between 1 and 3
             int numNPCs = ThreadLocalRandom.current().nextInt(1, 3 + 1);
@@ -50,13 +62,15 @@ public class Board {
                 roomNpcIds.get(i).add(ThreadLocalRandom.current().nextInt(1, JPAUtil.getNoOfEntries("NPC") + 1));
             }
         }
+        return roomNpcIds;
     }
 
 
     /**
-     * Function to store NPC health values in the correspond correspondingNPCHealth array
+     * Function to store NPC health values in the correspond correspondingNPCHealth array. first index corresponds to the room
+     * second index refers to the index of the npc in the npc array
      */
-    public void generateNPCHealth(){
+    public ArrayList<ArrayList<Integer>> generateNPCHealth(){
         int counter1 = 0;
         for (ArrayList<Integer> npcsInRoom: roomNpcIds) {
             correspondingNPCHealth.add(new ArrayList<>(npcsInRoom.size()));
@@ -67,6 +81,7 @@ public class Board {
             }
             counter1++;
         }
+        return correspondingNPCHealth;
     }
 
     /**
