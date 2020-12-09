@@ -4,6 +4,7 @@ import org.example.entity.JPAUtil;
 import org.example.entity.Score;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Game {
@@ -32,6 +33,18 @@ public class Game {
             System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()).getDescription());
             System.out.println();
         }
+        // Save highscore
+        System.out.println("Would you like to save your score to the leaderboard? (Y/N)");
+        String choice = stdin.nextLine().toUpperCase();
+        if(choice.equals("Y")) {
+            System.out.println("Enter your name:");
+            String name = stdin.nextLine();
+            // Save
+            JPAUtil.setScore(name, player.getGoldCarried());
+            // TODO: Tell user what rank they were placed at
+            showHighscores();
+        }
+        resetGameWithCurrentStats(player);
     }
 
     /**
