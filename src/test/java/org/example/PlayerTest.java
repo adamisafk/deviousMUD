@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.entity.Item;
+import org.example.entity.JPAUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,6 +43,14 @@ public class PlayerTest {
         assertEquals(-1, player.isIntInRange("test", 2));
     }
 
-
+    @Test
+    void testPickupItem() throws Exception {
+        Player player = new Player();
+        Item item = JPAUtil.getItem(1);
+        player.pickupItem(item);
+        Item carriedItem = (player.getItemCarried().get(1));
+        assertEquals("Black Scythe", carriedItem.getName());
+        assertEquals(1, carriedItem.getId());
+    }
 
 }
