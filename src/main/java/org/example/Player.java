@@ -93,12 +93,22 @@ public class Player {
 
         if (result >= 10) {
 
-
-            int damageDealt = 2;
             //npc.setHealthValue(npc.getHealthValue() - damageDealt);
 
             System.out.println("You dealt damage!");
-            return damageDealt;
+            if (itemCarried.get(currentInventoryItem).getMeleeDamage()> itemCarried.get(currentInventoryItem).getMagicDamage()) {
+                r = new Random();
+                int attackResult = r.nextInt(itemCarried.get(currentInventoryItem).getMeleeDamage());
+                int damageDealt = attackResult + 1;
+                return damageDealt;
+
+            } else{
+                r = new Random();
+                int attackResult = r.nextInt(itemCarried.get(currentInventoryItem).getMagicDamage());
+                int damageDealt = attackResult + 1;
+                return damageDealt;
+            }
+
         } else {
             System.out.println("You missed your attack!");
         }
@@ -115,8 +125,8 @@ public class Player {
         // calculate the damage taken + update the variable npc.heathvalue
         if (result >= 15) {
             r = new Random();
-            int attackResult = r.nextInt(3);
-            int damageDealt = attackResult;
+            int attackResult = r.nextInt(2);
+            int damageDealt = attackResult + 1;
             this.healthValue = healthValue - damageDealt;
             System.out.println("You took damage!");
         }
