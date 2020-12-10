@@ -205,7 +205,7 @@ public class Player {
 
     public Player() {
      this.currentRoom = 1;
-     this.healthValue = 10;
+     this.healthValue = 30;
      this.itemCarried = new ArrayList<>();
      //Make fists default weapon
      itemCarried.add(JPAUtil.getItem(9));
