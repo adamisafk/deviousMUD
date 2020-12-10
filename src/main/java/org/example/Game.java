@@ -1,13 +1,8 @@
 package org.example;
 
-import org.example.entity.JPAUtil;
-import org.example.entity.Score;
-import org.example.entity.NPC;
+import org.example.entity.*;
 
-import javax.swing.*;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -22,6 +17,7 @@ public class Game {
     // these are used for keeping track of combat stats
     private int selectedRoomNpc;
     private int selectedNPChealth;
+    private int selectedRoomChest;
 
     public Game() {
         gameBoard = new Board();
@@ -165,6 +161,13 @@ public class Game {
                     }
                 }
                 break;
+            case "take item":
+                Chest chest = selectChest();
+                if (chest != null) {
+                    pickupItem(chest);
+                    gameBoard.destroyChestAtIndex(player.getCurrentRoom(), selectedRoomChest - 1);
+                }
+                break;
             default:
                 System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
@@ -199,6 +202,15 @@ public class Game {
         System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).getName());
     }
 
+    public void pickupItem(NPC npc) {
+        Item item = JPAUtil.getItemByNPCId(npc.getId());
+        player.pickupItem(item);
+    }
+    public void pickupItem(Chest chest) {
+        Item item = JPAUtil.getItemByChestId(chest.getId());
+        player.pickupItem(item);
+    }
+
     /**
      * Helper function to select an NPC in the player's current room
      * @return the selected NPC
@@ -225,6 +237,26 @@ public class Game {
                 System.out.println("Please select a valid npc");
             }
         }
+    }
+    /**
+     * Helper function to select an chest in the player's current room
+     * @return the selected chest
+     */
+    public Chest selectChest(){
+        while(true) {
+            System.out.println("Which chest?");
+            listChests();
+            String answer = stdin.nextLine();
+            if (isIntInRange(answer, gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size()) > 0) {
+
+                selectedRoomChest = isIntInRange(answer, gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size());
+                return JPAUtil.getChest(gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).get(selectedRoomChest - 1));
+            } else if (answer.equals("q") || answer.equals("exit")) {
+                return null;
+            } else {
+                System.out.println("Please select a valid chest");
+            }
+        }
 
 
     }
@@ -242,6 +274,16 @@ public class Game {
             } else {
                 System.out.printf("[%d] ---  %s [DEAD] \n", i + 1, npcName);
             }
+        }
+    }
+    /**
+     * Function to list the chests in the current room of the player
+     */
+    public void listChests(){
+
+        for (int i = 0; i < gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size(); i++) {
+            String chestName = JPAUtil.getChest(gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).get(i)).getName();
+            System.out.printf("[%d] ---  %s \n", i + 1, chestName);
         }
     }
 

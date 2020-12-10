@@ -146,6 +146,21 @@ public class JPAUtil {
 
         return item;
     }
+    public static Item getItemByChestId(int o) {
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        // Getting model from db by id
+        Chest chest = entityManager.find(Chest.class, o);
+        Item item = chest.getItemCarried();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+
+        return item;
+    }
+
     public static ArrayList<Score> getRank(String name) {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();

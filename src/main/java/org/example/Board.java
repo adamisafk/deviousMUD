@@ -12,8 +12,6 @@ public class Board {
     private ArrayList<ArrayList<Integer>> roomNpcIds;
     private ArrayList<ArrayList<Integer>> correspondingNPCHealth;
     private ArrayList<ArrayList<Integer>> roomChestIds;
-    private ArrayList<ArrayList<Item>> npcItemIds;
-    private ArrayList<ArrayList<Item>> chestItemIds;
 
     public Board(){
         generateBoard();
@@ -87,13 +85,6 @@ public class Board {
         return correspondingNPCHealth;
     }
 
-    public ArrayList<ArrayList<Integer>> generateNpcItemIds(){
-        // Get npcs in room and take the item carried column
-        // Use number from item carried column to get item
-        // Make a new array with [[NPC], [Item]]
-        return null;
-    }
-
     /**
      * Function to generate a random selection of chest IDs. randomly generate between 1 and 2 chests
      */
@@ -123,6 +114,10 @@ public class Board {
 
     public void setElementCorrespondingNPCHealth(int value, int npcIndex, int currentRoom){
         this.correspondingNPCHealth.get(currentRoom-1).set(npcIndex, value);
+    }
+
+    public void destroyChestAtIndex(int currentRoom, int chestIndex) {
+        roomChestIds.get(currentRoom-1).remove(chestIndex);
     }
 }
 
