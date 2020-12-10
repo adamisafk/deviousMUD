@@ -33,3 +33,11 @@ HINT find this:
 ### If you wish to run the JPAUtil tests, please re-run `mysql -u <your_username> -p deviousMUD < sqldump.sql`, this ensures that the database is fresh because some of the tests rely on specific data being present.
 
 NOTE: The developers worked on macOS, so this hasn't been tested on windows or linux. Also, they used Intellij!
+
+## About this Repository
+To view current sprints (and closed sprints) please go to the projects tab. At the time of writing you will find one closed project (our first 'sprint'). In the menu you will find the sprint goal for that sprint.
+To view the sprint backlog board follow the hyperlink on the project name. This will take you to a kanban-esq board where user stories and tasks are stored. Most user stories have sub tasks attached to them (written in the comments), an estimation and acceptance criteria.
+
+The wiki is a useful place to look, it contains useful documentation including uml diagrams, database diagrams, descriptive text for rooms, chests and items, and other useful information.
+
+
