@@ -61,7 +61,15 @@ public class Game {
         catch(Exception ignored)
         {}
         System.out.println("... looking around you, you realise you are in a room....");
-        System.out.println("[Press enter]");
+        System.out.println("[Press enter to continue]");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception ignored)
+        {}
+        System.out.println("... as you stand up, a long wooden staff falls from you body... you pick this up, it might be useful.");
+        System.out.println("[Press enter to continue]");
         try
         {
             System.in.read();
@@ -69,6 +77,7 @@ public class Game {
         catch(Exception ignored)
         {}
         System.out.println("Reaching into your pocket, you find a compass...");
+        System.out.println("[Press enter to continue]");
         try
         {
             System.in.read();
@@ -76,7 +85,7 @@ public class Game {
         catch(Exception ignored)
         {}
         System.out.println("Examining the compass and the room, you realise that there are four doors in this room, each \naligned with the four cardinal directions on the compass, north, south east and west.\n");
-
+        System.out.println("[Press enter to continue]\n");
         //main game loop
         while(true){
 
