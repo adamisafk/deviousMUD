@@ -93,12 +93,24 @@ public class Player {
 
         if (result >= 10) {
 
-
-            int damageDealt = 2;
             //npc.setHealthValue(npc.getHealthValue() - damageDealt);
 
             System.out.println("You dealt damage!");
-            return damageDealt;
+            if (itemCarried.get(currentInventoryItem).getMeleeDamage()> itemCarried.get(currentInventoryItem).getMagicDamage()) {
+                r = new Random();
+                int attackResult = r.nextInt(itemCarried.get(currentInventoryItem).getMeleeDamage());
+                int damageDealt = attackResult + 1;
+                return damageDealt;
+
+            } else{
+                r = new Random();
+                int attackResult = r.nextInt(itemCarried.get(currentInventoryItem).getMagicDamage());
+                int damageDealt = attackResult + 1;
+                return damageDealt;
+            }
+
+        } else {
+            System.out.println("You missed your attack!");
         }
         System.out.printf("You use your weapon but the %s parries your attack...\n", npc.getName());
         return 0;
@@ -113,7 +125,9 @@ public class Player {
 
         // calculate the damage taken + update the variable npc.heathvalue
         if (result >= 15) {
-            int damageDealt = 2;
+            r = new Random();
+            int attackResult = r.nextInt(2);
+            int damageDealt = attackResult + 1;
             this.healthValue = healthValue - damageDealt;
             System.out.println("You took damage!");
         }
@@ -142,6 +156,7 @@ public class Player {
     public void setCurrentRoom(int currentRoom) { this.currentRoom = currentRoom; }
 
     public void equipItem(){
+        System.out.printf("You have " + goldCarried + " gold\n");
         while (true){
             System.out.println("Please select an item from your inventory: ");
             displayItems();
@@ -153,6 +168,10 @@ public class Player {
                 System.out.println("Please select a valid inventory item");
             }
         }
+    }
+
+    public void pickupItem(Item item) {
+        itemCarried.add(item);
     }
 
     /**
