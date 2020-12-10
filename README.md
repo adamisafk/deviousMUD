@@ -1,10 +1,10 @@
 # deviousMUD
 A simple text-based dungeon crawler, with database integration. The database is used to store rooms, items, chests, npcs and scores. 
 
-There are currently 5 rooms. Each of the rooms have randomly assigned NPCS and Chests, which carry items predefined in the database.
+There are currently 5 rooms. Each of the rooms have randomly assigned NPCS and CHests, which carry items predefined in the database.
 The player can move around the rooms and interact with NPCs, this includes fighting the NPCs. If a player defeats an NPC, they obtain the gold belonging to that npc. Players can take items from chests, and then equip different items from their inventory.
 
-The aim of the game is to find the boss room and defeat all of the npcs contained within it. The player then has the option to leave the dungeon, and save their score to the database. The player's score is governed by the amount of gold they've obtained by killing NPCs.
+The aim of the game is to find the boss room and defeat all of the npcs contained within it. The player then has to option to leave the dungeon, and save their score to the database. The player's score is governed by the amount of gold they've obtained by killing NPCs.
                                                                                                                                                              
 
 ## Database Install
@@ -40,4 +40,15 @@ To view the sprint backlog board follow the hyperlink on the project name. This 
 
 The wiki is a useful place to look, it contains useful documentation including uml diagrams, database diagrams, descriptive text for rooms, chests and items, and other useful information.
 
+## !SPOILER ALERT!
+To win the game, after starting a new game type the following commands:
 
+'move east', 'move south', 'move east'
+
+- you will now find yourself in the 'boss' room (you should recieve a message alerting you of this)-
+
+Next you must defeat all npcs in the room, type:
+'attack'
+select an npc to kill, and repeat until all npcs in the room are dead. (Note: spawning of npcs is random)
+
+you can now type 'leave' and you'll be prompted to save your highscore to the database.
