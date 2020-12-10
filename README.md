@@ -55,8 +55,5 @@ you can now type 'leave' and you'll be prompted to save your highscore to the da
 
 Note: if this becomes too tedious, type 'quit' at any time to leave the game, you'll then be prompted to save your highscore.
 
-## HELP/Instructions 
-
-Outside of combat type 'help' to view the instructions screen, on some screens to exit you will have to type 'q' or 'quit'
-
-At the start of the game you will be given 3 seperate lines of instructions, you will have to press enter 3 times.
+## Inconsistencies 
+The room, item, chest and npc descriptions may not always be accurate. For example, as the chests in the room are randomly generated a room may have have a "wooden chest" one play-through and a "wooden barrel" another play-through. However the room descriptions mention objects in the room, these are purely descriptive and are not accurately describing what's actually in the room. This is the same for doors, some room descriptions will not mention that there is a door in a place where there is. To get around this just try to move in any direction and you will have a prompt that tells you whether or not you successfully get through a door.
