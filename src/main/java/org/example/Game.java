@@ -328,6 +328,11 @@ public class Game {
         if(player.getHealthValue() <= 0){
             return false; // player lost
         } else {
+            // give the player the npc's gold
+            int currentPlayerGold = player.getGoldCarried();
+            int npcGold = npc.getGoldCarried();
+            player.setGoldCarried(currentPlayerGold + npcGold);
+            System.out.printf("You gained %d gold. Your gold is now: %d \n", npcGold, player.getGoldCarried());
             return true; // player wins
         }
     }
