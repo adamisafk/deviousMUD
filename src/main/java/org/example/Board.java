@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.entity.Item;
 import org.example.entity.JPAUtil;
 import org.example.entity.Room;
 
@@ -11,6 +12,8 @@ public class Board {
     private ArrayList<ArrayList<Integer>> roomNpcIds;
     private ArrayList<ArrayList<Integer>> correspondingNPCHealth;
     private ArrayList<ArrayList<Integer>> roomChestIds;
+    private ArrayList<ArrayList<Item>> npcItemIds;
+    private ArrayList<ArrayList<Item>> chestItemIds;
 
     public Board(){
         generateBoard();
@@ -82,6 +85,13 @@ public class Board {
             counter1++;
         }
         return correspondingNPCHealth;
+    }
+
+    public ArrayList<ArrayList<Integer>> generateNpcItemIds(){
+        // Get npcs in room and take the item carried column
+        // Use number from item carried column to get item
+        // Make a new array with [[NPC], [Item]]
+        return null;
     }
 
     /**
