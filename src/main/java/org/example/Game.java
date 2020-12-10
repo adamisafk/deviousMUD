@@ -358,7 +358,14 @@ public class Game {
             int npcGold = npc.getGoldCarried();
             player.setGoldCarried(currentPlayerGold + npcGold);
             System.out.printf("You gained %d gold. Your gold is now: %d \n", npcGold, player.getGoldCarried());
-
+            // option to give the player the NPC's item
+            Item item = JPAUtil.getItemByNPCId(npc.getId());
+            System.out.println(npc.getName() + " has dropped a " + item.getName() + ". " + item.getDescription());
+            System.out.println("Do you want to pickup and equip the " + item.getName() + "? (Y/N)");
+            String choice = stdin.nextLine().toUpperCase();
+            if(choice.equals("Y")) {
+                pickupItem(npc);
+            }
             return true; // player wins
         }
     }
@@ -381,7 +388,7 @@ public class Game {
         System.out.println("|X| Welcome to Devious MUD, the aim of the game is to collect as much gold as possible, and to escape with your life.   |X|  \\  \\           | `._   `\\\\  |  //'   _,' |           /  /                                                           ");
         System.out.println("|X|                                                                                                                     |X|    `-.\\         /'  _ `---'' , . ``---' _  `\\         /,-'                                                                    ");
         System.out.println("|X| In order to play the game you will need to use these commands                                                       |X|                /      \\  ,='/ \\`=.    /     \\                                                                        ");
-        System.out.println("|X| To EXAMINE an object or a room, type 'examine' before the name of the object or room you wish to examine            |X|                |__   /|\\_,--.,-.--,--._/|\\  __|          ");
+        System.out.println("|X| To EXAMINE an object or a room, type 'examine' before 'npc', 'chest' or 'room'                                      |X|                |__   /|\\_,--.,-.--,--._/|\\  __|          ");
         System.out.println("|X| To MOVE to a room, type 'move' before the direction (north, south, east, west) of the room you wish to move to      |X|               /  `./  \\\\`\\ |  |  | /,//' \\,'  \\       ");
         System.out.println("|X| To ATTACK a NPC, type 'attack', you'll then be asked which npc you would like to attack                             |X|              /   /     ||--+--|--+-/-|     \\   \\         ");
         System.out.println("|X| To GRAB an item, type 'grab' before the name of the item you wish to grab                                           |X|             |   |     /'\\_\\_\\ | /_/_/`\\     |  |       ");
