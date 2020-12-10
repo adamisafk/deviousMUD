@@ -54,3 +54,7 @@ select an npc to kill, and repeat until all npcs in the room are dead. (Note: sp
 you can now type 'leave' and you'll be prompted to save your highscore to the database.
 
 Note: if this becomes too tedious, type 'quit' at any time to leave the game, you'll then be prompted to save your highscore.
+
+## HELP/Instructions 
+
+Outside of combat type 'help' to view the instructions screen
