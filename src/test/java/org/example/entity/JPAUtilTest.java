@@ -157,4 +157,13 @@ public class JPAUtilTest {
         assertEquals(3, JPAUtil.getItemByNPCId(4).getId());
         assertEquals(7, JPAUtil.getItemByNPCId(5).getId());
     }
+    @Test
+    void testGetItemfromChest() throws Exception{
+        assertEquals(1, JPAUtil.getItemByChestId(1).getId());
+        assertEquals(2, JPAUtil.getItemByChestId(2).getId());
+        assertEquals(3, JPAUtil.getItemByChestId(3).getId());
+        assertEquals(6, JPAUtil.getItemByChestId(4).getId());
+        assertEquals(7, JPAUtil.getItemByChestId(5).getId());
+        assertEquals(8, JPAUtil.getItemByChestId(6).getId());
+    }
 }
