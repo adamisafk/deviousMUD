@@ -78,4 +78,18 @@ public class NPC {
 
     public NPC() {
     }
+
+    public boolean converseWithAndAttack(Room room, int dialogueOption) {
+        if (dialogueOption == 1) {
+            System.out.println("I am a " + this.name);
+        } else if (dialogueOption == 2) {
+            room.describeRoom();
+        } else if (dialogueOption == 3) {
+            System.out.println("The " + this.name + "says 'Goodbye'");
+        } else if (dialogueOption == 4) {
+            System.out.println("You have decided to attack the " + this.name + ", prepare yourself");
+            return true;
+        }
+        return false;
+    }
 }

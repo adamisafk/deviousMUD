@@ -112,7 +112,7 @@ public class Room {
             System.out.println(getChest(roomChestIds.get(currentRoom).get(chestID)).getDescription());
         }
     }
-    public void describeRoom(int currentRoom) {
+    public void describeRoom() {
         System.out.print("Name: ");
         System.out.println(getName());
         System.out.println("Description: ");

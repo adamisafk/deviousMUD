@@ -157,6 +157,14 @@ public class Game {
             case "examine chest":
                 describeChests();
                 break;
+            case "talk":
+                NPC npcToTalkTo = selectNPC();
+                if (npcToTalkTo != null) {
+                    if (talkToNPC(npcToTalkTo)) {
+                        return playerBattle(npcToTalkTo);
+                    }
+                }
+                break;
             default:
                 System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
@@ -169,7 +177,7 @@ public class Game {
     public void describeRoom(){
         // print out the room description
         System.out.println("=============================================================================================================================================");
-        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom(player.getCurrentRoom()-1);
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom();
         System.out.println("=============================================================================================================================================");
     }
 
@@ -405,6 +413,27 @@ public class Game {
             }
         } catch (Exception e){
             return -1;
+        }
+    }
+
+    public boolean talkToNPC(NPC npc) {
+
+        while (true) {
+            System.out.println("What would you like to say to the character?");
+            System.out.println("[1] What are you?");
+            System.out.println("[2] What's in this room?");
+            System.out.println("[3] I have nothing more to say");
+            System.out.println("[4] Attack");
+            int selectAnOption;
+            String answer = stdin.nextLine();
+            int integerAnswer = isIntInRange(answer, 4);
+            if (integerAnswer > 0) {
+                return npc.converseWithAndAttack(gameBoard.getRoomAtIndex(player.getCurrentRoom()-1), integerAnswer);
+            } else if (answer.equals("q")) {
+                return false;
+            } else {
+                System.out.println("Please enter a valid option or type q to quit");
+            }
         }
     }
 
