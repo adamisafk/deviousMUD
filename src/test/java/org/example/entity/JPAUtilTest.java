@@ -74,6 +74,9 @@ public class JPAUtilTest {
         assertEquals("Wooden Barrel", JPAUtil.getChest(1).getName());
         assertEquals("Pile of broken shipping crates", JPAUtil.getChest(2).getName());
         assertEquals("Wooden Chest", JPAUtil.getChest(3).getName());
+        assertEquals("Wooden Barrel", JPAUtil.getChest(4).getName());
+        assertEquals("Pile of broken shipping crates", JPAUtil.getChest(5).getName());
+        assertEquals("Wooden Chest", JPAUtil.getChest(6).getName());
     }
 
     @Test
@@ -100,7 +103,6 @@ public class JPAUtilTest {
         assertEquals(10, JPAUtil.getNoOfEntries("Item"));
         assertEquals(3, JPAUtil.getNoOfEntries("Chest"));
     }
-
 
 
 }
