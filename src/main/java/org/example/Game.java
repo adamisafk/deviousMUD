@@ -233,7 +233,7 @@ public class Game {
     public void pickupItem(Chest chest) {
         Item item = JPAUtil.getItemByChestId(chest.getId());
         player.pickupItem(item);
-        System.out.printf("...as you grasp at the item contained within the %s, it disintegrates \n", chest.getName());
+        System.out.printf("...as you grasp at the item contained within, the %s disintegrates \n", chest.getName());
     }
 
     /**
@@ -399,6 +399,7 @@ public class Game {
         System.out.println("|X| To LEAVE the dungeon after completing the boss room by killing all NPCs type 'leave'                                |X|");
         System.out.println("|X| To QUIT the game type 'quit'                                                                                        |X|");
         System.out.println("|X| If you would like to exit EXAMINING a chest or TALKING or ATTACKING an NPC, type 'q'                                |X|");
+        System.out.println("|X| To TAKE an item from a chest, type 'take item', you'll then be asked which chest to take from.                      |X|");
         System.out.println("|X|                                                                                                                     |X|");
         System.out.println("|X| You must navigate to the final room and kill all the NPCs in the boss room to win, good luck!                       |X|");
         System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
