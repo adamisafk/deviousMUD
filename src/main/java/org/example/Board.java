@@ -9,14 +9,28 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Board {
     private Room[] roomArray;
     private ArrayList<ArrayList<Integer>> roomNpcIds;
+    private ArrayList<ArrayList<Integer>> correspondingNPCHealth;
     private ArrayList<ArrayList<Integer>> roomChestIds;
 
     public Board(){
         generateBoard();
         roomNpcIds = new ArrayList<ArrayList<Integer>>();
+        correspondingNPCHealth = new ArrayList<ArrayList<Integer>>();
         roomChestIds = new ArrayList<ArrayList<Integer>>();
         generateRoomNPCIDs();
+        generateNPCHealth();
         generateRoomChestIDs();
+    }
+
+    /**
+     * Alternative constructor used for testing
+     * @param i any integer
+     */
+    public Board(int i){
+        generateBoard();
+        roomNpcIds = new ArrayList<ArrayList<Integer>>();
+        correspondingNPCHealth = new ArrayList<ArrayList<Integer>>();
+        roomChestIds = new ArrayList<ArrayList<Integer>>();
     }
 
     /**
@@ -35,9 +49,10 @@ public class Board {
     }
 
     /**
-     * Function to generate a random selection of NPC IDs. randomly generate between 1 and 3 npcs
+     * Function to generate a random selection of NPC IDs. randomly generate between 1 and 3 npcs per room
+     * The first index corresponds to the room, second to the id of the npc
      */
-    public void generateRoomNPCIDs(){
+    public ArrayList<ArrayList<Integer>> generateRoomNPCIDs(){
         for (int i = 0; i < roomArray.length; i++) {
             // generate random number between 1 and 3
             int numNPCs = ThreadLocalRandom.current().nextInt(1, 3 + 1);
@@ -47,6 +62,26 @@ public class Board {
                 roomNpcIds.get(i).add(ThreadLocalRandom.current().nextInt(1, JPAUtil.getNoOfEntries("NPC") + 1));
             }
         }
+        return roomNpcIds;
+    }
+
+
+    /**
+     * Function to store NPC health values in the correspond correspondingNPCHealth array. first index corresponds to the room
+     * second index refers to the index of the npc in the npc array
+     */
+    public ArrayList<ArrayList<Integer>> generateNPCHealth(){
+        int counter1 = 0;
+        for (ArrayList<Integer> npcsInRoom: roomNpcIds) {
+            correspondingNPCHealth.add(new ArrayList<>(npcsInRoom.size()));
+            int counter2 = 0;
+            for (Integer npcID: npcsInRoom) {
+                correspondingNPCHealth.get(counter1).add(JPAUtil.getNPC(npcsInRoom.get(counter2)).getHealthValue());
+                counter2++;
+            }
+            counter1++;
+        }
+        return correspondingNPCHealth;
     }
 
     /**
@@ -70,6 +105,14 @@ public class Board {
 
     public ArrayList<ArrayList<Integer>> getRoomChestIds() {
         return roomChestIds;
+    }
+
+    public ArrayList<ArrayList<Integer>> getCorrespondingNPCHealth() {
+        return correspondingNPCHealth;
+    }
+
+    public void setElementCorrespondingNPCHealth(int value, int npcIndex, int currentRoom){
+        this.correspondingNPCHealth.get(currentRoom-1).set(npcIndex, value);
     }
 }
 
