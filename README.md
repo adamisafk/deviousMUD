@@ -12,3 +12,5 @@ Ensure you have mysql installed and running on your machine and generate an empt
 
 In the root directory of the project, run:
 `mysql -u root -p deviousMUD < sqldump.sql`
+
+(If this doesnt work type ls and make sure sqldump.sql is in the current directory)
