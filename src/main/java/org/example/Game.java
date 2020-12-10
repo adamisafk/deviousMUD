@@ -233,7 +233,7 @@ public class Game {
     public void pickupItem(Chest chest) {
         Item item = JPAUtil.getItemByChestId(chest.getId());
         player.pickupItem(item);
-        System.out.printf("...as you grasp at the item contained within the %s, it disintegrates", chest.getName());
+        System.out.printf("...as you grasp at the item contained within the %s, it disintegrates \n", chest.getName());
     }
 
     /**
