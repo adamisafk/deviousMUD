@@ -283,7 +283,8 @@ public class Game {
 
         for (int i = 0; i < gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size(); i++) {
             String chestName = JPAUtil.getChest(gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).get(i)).getName();
-            System.out.printf("[%d] ---  %s \n", i + 1, chestName);
+            Item item = JPAUtil.getItemByChestId(gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).get(i));
+            System.out.printf("[%d] ---  %s \n", i + 1, chestName + " (" + item.getName() + ")");
         }
     }
 
