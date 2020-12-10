@@ -163,6 +163,7 @@ public class Player {
             String answer = stdin.nextLine();
             if(isIntInRange(answer, itemCarried.size()) > 0){
                 this.currentInventoryItem = isIntInRange(answer, itemCarried.size()) - 1;
+                System.out.printf("%s ... \n", itemCarried.get(currentInventoryItem).getDescription());
                 break;
             } else {
                 System.out.println("Please select a valid inventory item");
