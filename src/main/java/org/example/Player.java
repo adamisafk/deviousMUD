@@ -99,6 +99,8 @@ public class Player {
 
             System.out.println("You dealt damage!");
             return damageDealt;
+        } else {
+            System.out.println("You missed your attack!");
         }
         return 0;
     }
@@ -141,6 +143,7 @@ public class Player {
     public void setCurrentRoom(int currentRoom) { this.currentRoom = currentRoom; }
 
     public void equipItem(){
+        System.out.printf("You have " + goldCarried + " gold\n");
         while (true){
             System.out.println("Please select an item from your inventory: ");
             displayItems();
