@@ -155,6 +155,10 @@ public class Player {
         }
     }
 
+    public void pickupItem(Item item) {
+        itemCarried.add(item);
+    }
+
     /**
      * Functiopn returns the number if it is a valid inventory slot. otherwise returns negative number
      * @param answer

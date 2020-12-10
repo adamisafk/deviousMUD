@@ -131,6 +131,35 @@ public class JPAUtil {
 
         return (int) query;
     }
+    public static Item getItemByNPCId(int o) {
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        // Getting model from db by id
+        NPC npc = entityManager.find(NPC.class, o);
+        Item item = npc.getItemCarried();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+
+        return item;
+    }
+    public static Item getItemByChestId(int o) {
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        entityManager.getTransaction().begin();
+
+        // Getting model from db by id
+        Chest chest = entityManager.find(Chest.class, o);
+        Item item = chest.getItemCarried();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+
+        return item;
+    }
+
     public static ArrayList<Score> getRank(String name) {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();

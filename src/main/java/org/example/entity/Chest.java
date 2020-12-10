@@ -14,8 +14,12 @@ public class Chest {
     private String name;
     @Column(name = "chest_description")
     private String description;
-    @Column(name = "chest_item")
-    private Integer itemCarried;
+    @ManyToOne
+    @JoinColumn(name = "chest_item", referencedColumnName = "item_id")
+    private Item itemCarried;
+
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -31,10 +35,10 @@ public class Chest {
         this.description = description;
     }
 
-    public Integer getItemCarried() {
+    public Item getItemCarried() {
         return itemCarried;
     }
-    public void setItemCarried(Integer itemCarried) {
+    public void setItemCarried(Item itemCarried) {
         this.itemCarried = itemCarried;
     }
 
