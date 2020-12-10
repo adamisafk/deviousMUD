@@ -35,4 +35,15 @@ public class GameTest {
         assertEquals(-1, game.isIntInRange("5", 2));
         assertEquals(-1, game.isIntInRange("-abcdefg", 2));
     }
+
+    @Test
+    void testIsIntInRangeGame() throws Exception{
+        Game game = new Game();
+        assertEquals(1, game.isIntInRange("1", 2));
+        assertEquals(1, game.isIntInRange("1", 1));
+        assertEquals(-1, game.isIntInRange("3", 2));
+        assertEquals(2, game.isIntInRange("2", 2));
+        assertEquals(-1, game.isIntInRange("0", 2));
+        assertEquals(-1, game.isIntInRange("test", 2));
+    }
 }
