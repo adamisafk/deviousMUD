@@ -79,6 +79,7 @@ public class JPAUtilTest {
         assertEquals("Wooden Chest", JPAUtil.getChest(6).getName());
     }
 
+
     @Test
     void testScores() throws Exception{
         // enter a new score
@@ -94,6 +95,48 @@ public class JPAUtilTest {
             }
         }
         assertEquals(10, scores.get(indexOfAddedScore).getScore());
+
+        // enter a new score
+        JPAUtil.setScore("Elliot", 100);
+
+        // get the score array
+        scores = JPAUtil.getScore();
+        indexOfAddedScore = -1;
+        for (int i = 0; i < scores.size(); i++) {
+            if(scores.get(i).getPlayerName().equals("Elliot")){
+                indexOfAddedScore = i;
+                break;
+            }
+        }
+        assertEquals(100, scores.get(indexOfAddedScore).getScore());
+
+        // enter a new score
+        JPAUtil.setScore("Harley", -20);
+
+        // get the score array
+        scores = JPAUtil.getScore();
+        indexOfAddedScore = -1;
+        for (int i = 0; i < scores.size(); i++) {
+            if(scores.get(i).getPlayerName().equals("Harley")){
+                indexOfAddedScore = i;
+                break;
+            }
+        }
+        assertEquals(-20, scores.get(indexOfAddedScore).getScore());
+
+        // enter a new score
+        JPAUtil.setScore("Adam", 10000000);
+
+        // get the score array
+        scores = JPAUtil.getScore();
+        indexOfAddedScore = -1;
+        for (int i = 0; i < scores.size(); i++) {
+            if(scores.get(i).getPlayerName().equals("Adam")){
+                indexOfAddedScore = i;
+                break;
+            }
+        }
+        assertEquals(10000000, scores.get(indexOfAddedScore).getScore());
     }
 
     @Test
@@ -101,7 +144,7 @@ public class JPAUtilTest {
         assertEquals(7, JPAUtil.getNoOfEntries("Room"));
         assertEquals(9, JPAUtil.getNoOfEntries("NPC"));
         assertEquals(10, JPAUtil.getNoOfEntries("Item"));
-        assertEquals(3, JPAUtil.getNoOfEntries("Chest"));
+        assertEquals(6, JPAUtil.getNoOfEntries("Chest"));
     }
 
 
