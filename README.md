@@ -21,6 +21,7 @@ THEN (in project directory):
 - set the username to <your_username>
 - set password to <your_password>
 
+HINT find this:
 ' "javax.persistence.jdbc.user" value="root" '
 ' "javax.persistence.jdbc.password" value="password" '
 
