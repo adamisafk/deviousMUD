@@ -92,7 +92,7 @@ public class Room {
         for (int npcID = 0; npcID < roomNpcIds.get(currentRoom).size(); npcID++) {
             System.out.print("Name: ");
             System.out.println(getNPC(roomNpcIds.get(currentRoom).get(npcID)).getName());
-            System.out.print("Description: ");
+            System.out.println("Description: ");
             System.out.println(getNPC(roomNpcIds.get(currentRoom).get(npcID)).getDescription());
         }
     }
@@ -108,14 +108,14 @@ public class Room {
         for (int chestID = 0; chestID < roomChestIds.get(currentRoom).size(); chestID++) {
             System.out.print("Name: ");
             System.out.println(getChest(roomChestIds.get(currentRoom).get(chestID)).getName());
-            System.out.print("Description: ");
+            System.out.println("Description: ");
             System.out.println(getChest(roomChestIds.get(currentRoom).get(chestID)).getDescription());
         }
     }
     public void describeRoom(int currentRoom) {
         System.out.print("Name: ");
         System.out.println(getName());
-        System.out.print("Description: ");
+        System.out.println("Description: ");
         System.out.println(getDescription());
     }
 }
