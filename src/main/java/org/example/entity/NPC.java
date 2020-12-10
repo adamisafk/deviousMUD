@@ -19,8 +19,9 @@ public class NPC {
     private Integer armourValue;
     @Column(name = "npc_gold_carried")
     private Integer goldCarried;
-    @Column(name = "npc_item_carried")
-    private Integer itemCarried;
+    @ManyToOne
+    @JoinColumn(name = "npc_item_carried", referencedColumnName = "item_id")
+    private Item itemCarried;
     @Column(name = "npc_is_friendly")
     private Boolean isFriendly;
 
@@ -62,10 +63,10 @@ public class NPC {
         this.goldCarried = goldCarried;
     }
 
-    public Integer getItemCarried() {
+    public Item getItemCarried() {
         return itemCarried;
     }
-    public void setItemCarried(Integer itemCarried) {
+    public void setItemCarried(Item itemCarried) {
         this.itemCarried = itemCarried;
     }
 
@@ -77,5 +78,19 @@ public class NPC {
     }
 
     public NPC() {
+    }
+
+    public boolean converseWithAndAttack(Room room, int dialogueOption) {
+        if (dialogueOption == 1) {
+            System.out.println("I am a " + this.name);
+        } else if (dialogueOption == 2) {
+            room.describeRoom();
+        } else if (dialogueOption == 3) {
+            System.out.println("The " + this.name + "says 'Goodbye'");
+        } else if (dialogueOption == 4) {
+            System.out.println("You have decided to attack the " + this.name + ", prepare yourself");
+            return true;
+        }
+        return false;
     }
 }

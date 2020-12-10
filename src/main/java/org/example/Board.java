@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.entity.Item;
 import org.example.entity.JPAUtil;
 import org.example.entity.Room;
 
@@ -113,6 +114,10 @@ public class Board {
 
     public void setElementCorrespondingNPCHealth(int value, int npcIndex, int currentRoom){
         this.correspondingNPCHealth.get(currentRoom-1).set(npcIndex, value);
+    }
+
+    public void destroyChestAtIndex(int currentRoom, int chestIndex) {
+        roomChestIds.get(currentRoom-1).remove(chestIndex);
     }
 }
 

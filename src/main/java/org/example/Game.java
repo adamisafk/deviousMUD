@@ -1,8 +1,6 @@
 package org.example;
 
-import org.example.entity.JPAUtil;
-import org.example.entity.Score;
-import org.example.entity.NPC;
+import org.example.entity.*;
 
 import javax.swing.*;
 import java.sql.SQLOutput;
@@ -22,6 +20,7 @@ public class Game {
     // these are used for keeping track of combat stats
     private int selectedRoomNpc;
     private int selectedNPChealth;
+    private int selectedRoomChest;
 
     public Game() {
         gameBoard = new Board();
@@ -157,6 +156,21 @@ public class Game {
             case "examine chest":
                 describeChests();
                 break;
+            case "talk":
+                NPC npcToTalkTo = selectNPC();
+                if (npcToTalkTo != null) {
+                    if (talkToNPC(npcToTalkTo)) {
+                        return playerBattle(npcToTalkTo);
+                    }
+                }
+                break;
+            case "take item":
+                Chest chest = selectChest();
+                if (chest != null) {
+                    pickupItem(chest);
+                    gameBoard.destroyChestAtIndex(player.getCurrentRoom(), selectedRoomChest - 1);
+                }
+                break;
             default:
                 System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
@@ -169,7 +183,7 @@ public class Game {
     public void describeRoom(){
         // print out the room description
         System.out.println("=============================================================================================================================================");
-        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom(player.getCurrentRoom()-1);
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom();
         System.out.println("=============================================================================================================================================");
     }
 
@@ -189,6 +203,15 @@ public class Game {
     public void currentRoomName(){
         System.out.println("You examine the room around you... its name is....");
         System.out.println(gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).getName());
+    }
+
+    public void pickupItem(NPC npc) {
+        Item item = JPAUtil.getItemByNPCId(npc.getId());
+        player.pickupItem(item);
+    }
+    public void pickupItem(Chest chest) {
+        Item item = JPAUtil.getItemByChestId(chest.getId());
+        player.pickupItem(item);
     }
 
     /**
@@ -217,6 +240,26 @@ public class Game {
                 System.out.println("Please select a valid npc");
             }
         }
+    }
+    /**
+     * Helper function to select an chest in the player's current room
+     * @return the selected chest
+     */
+    public Chest selectChest(){
+        while(true) {
+            System.out.println("Which chest?");
+            listChests();
+            String answer = stdin.nextLine();
+            if (isIntInRange(answer, gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size()) > 0) {
+
+                selectedRoomChest = isIntInRange(answer, gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size());
+                return JPAUtil.getChest(gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).get(selectedRoomChest - 1));
+            } else if (answer.equals("q") || answer.equals("exit")) {
+                return null;
+            } else {
+                System.out.println("Please select a valid chest");
+            }
+        }
 
 
     }
@@ -234,6 +277,17 @@ public class Game {
             } else {
                 System.out.printf("[%d] ---  %s [DEAD] \n", i + 1, npcName);
             }
+        }
+    }
+    /**
+     * Function to list the chests in the current room of the player
+     */
+    public void listChests(){
+
+        for (int i = 0; i < gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size(); i++) {
+            String chestName = JPAUtil.getChest(gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).get(i)).getName();
+            Item item = JPAUtil.getItemByChestId(gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).get(i));
+            System.out.printf("[%d] ---  %s \n", i + 1, chestName + " (" + item.getName() + ")");
         }
     }
 
@@ -278,9 +332,11 @@ public class Game {
         if(player.getHealthValue() <= 0){
             return false; // player lost
         } else {
-            int playGold = player.getGoldCarried();
-            player.setGoldCarried(playGold + npc.getGoldCarried());
-            System.out.printf("You've defeated the %s! You've obtained %d gold\n", npc.getName(), npc.getGoldCarried());
+            // give the player the npc's gold
+            int currentPlayerGold = player.getGoldCarried();
+            int npcGold = npc.getGoldCarried();
+            player.setGoldCarried(currentPlayerGold + npcGold);
+            System.out.printf("You gained %d gold. Your gold is now: %d \n", npcGold, player.getGoldCarried());
             return true; // player wins
         }
     }
@@ -408,6 +464,27 @@ public class Game {
             }
         } catch (Exception e){
             return -1;
+        }
+    }
+
+    public boolean talkToNPC(NPC npc) {
+
+        while (true) {
+            System.out.println("What would you like to say to the character?");
+            System.out.println("[1] What are you?");
+            System.out.println("[2] What's in this room?");
+            System.out.println("[3] I have nothing more to say");
+            System.out.println("[4] Attack");
+            int selectAnOption;
+            String answer = stdin.nextLine();
+            int integerAnswer = isIntInRange(answer, 4);
+            if (integerAnswer > 0) {
+                return npc.converseWithAndAttack(gameBoard.getRoomAtIndex(player.getCurrentRoom()-1), integerAnswer);
+            } else if (answer.equals("q")) {
+                return false;
+            } else {
+                System.out.println("Please enter a valid option or type q to quit");
+            }
         }
     }
 

@@ -112,6 +112,7 @@ public class Player {
         } else {
             System.out.println("You missed your attack!");
         }
+        System.out.printf("You use your weapon but the %s parries your attack...\n", npc.getName());
         return 0;
     }
 
@@ -167,6 +168,10 @@ public class Player {
                 System.out.println("Please select a valid inventory item");
             }
         }
+    }
+
+    public void pickupItem(Item item) {
+        itemCarried.add(item);
     }
 
     /**
