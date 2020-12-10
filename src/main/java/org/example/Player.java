@@ -35,7 +35,7 @@ public class Player {
             } else if (this.currentRoom == 3 && direction == Direction.E){
                 setCurrentRoom(4);
             } else if (this.currentRoom == 4 && direction == Direction.E){
-                setCurrentRoom(4);
+                setCurrentRoom(5);
             } else if (this.currentRoom == 4 && direction == Direction.N){
                 setCurrentRoom(2);
             } else if (this.currentRoom == 4 && direction == Direction.W){

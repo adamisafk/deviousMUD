@@ -117,17 +117,17 @@ public class Game {
                 printDoor();
                 player.move(Direction.E);
                 currentRoomName();
-                break;
-            case "move west":
-                printDoor();
-                player.move(Direction.W);
-                currentRoomName();
                 if(player.getCurrentRoom() == 5){
                     skull();
                     System.out.println("You have entered a boss room, kill all the NPCs to win the game...");
                     System.out.println("... type 'leave' when you have finished.");
                     System.out.println("You may want to explore the rest of the dungeon before leaving.");
                 }
+                break;
+            case "move west":
+                printDoor();
+                player.move(Direction.W);
+                currentRoomName();
                 break;
             case "move north":
                 printDoor();
@@ -183,6 +183,9 @@ public class Game {
                     if(gameBoard.allNpcsInRoomAreDead(5)){
                         System.out.println("You managed to leave the dungeon....");
                         return false;
+                    } else {
+                        skull();
+                        System.out.println("Defeat all the NPCs to win.");
                     }
                 } else {
                     skull();
