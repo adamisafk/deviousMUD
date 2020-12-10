@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests to check that the JPAUtil class is working as expected.
@@ -147,5 +146,15 @@ public class JPAUtilTest {
         assertEquals(6, JPAUtil.getNoOfEntries("Chest"));
     }
 
-
+    // Test the functions involving relationships
+    @Test
+    void testGetItemByNPCId() throws Exception {
+        assertEquals(6, JPAUtil.getItemByNPCId(1).getId());
+        assertEquals("Fire Bolt Spell", JPAUtil.getItemByNPCId(1).getName());
+        assertEquals(5, JPAUtil.getItemByNPCId(1).getMagicDamage());
+        assertEquals(10, JPAUtil.getItemByNPCId(2).getId());
+        assertEquals(3, JPAUtil.getItemByNPCId(3).getId());
+        assertEquals(3, JPAUtil.getItemByNPCId(4).getId());
+        assertEquals(7, JPAUtil.getItemByNPCId(5).getId());
+    }
 }

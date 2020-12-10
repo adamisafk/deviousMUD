@@ -16,7 +16,7 @@ public class Main
     }
 
     public static void ormTest() {
-        Item item = JPAUtil.getItemByNPCId(1);
+        Item item = JPAUtil.getItemByNPCId(54654);
         System.out.println(item.getName());
     }
 }
