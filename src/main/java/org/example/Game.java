@@ -122,6 +122,12 @@ public class Game {
                 printDoor();
                 player.move(Direction.W);
                 currentRoomName();
+                if(player.getCurrentRoom() == 5){
+                    skull();
+                    System.out.println("You have entered a boss room, kill all the NPCs to win the game...");
+                    System.out.println("... type 'leave' when you have finished.");
+                    System.out.println("You may want to explore the rest of the dungeon before leaving.");
+                }
                 break;
             case "move north":
                 printDoor();
@@ -169,6 +175,18 @@ public class Game {
                 if (chest != null) {
                     pickupItem(chest);
                     gameBoard.destroyChestAtIndex(player.getCurrentRoom(), selectedRoomChest - 1);
+                }
+                break;
+            case "leave":
+                // see if the player is in the boss room
+                if(player.getCurrentRoom() == 5){
+                    if(gameBoard.allNpcsInRoomAreDead(5)){
+                        System.out.println("You managed to leave the dungeon....");
+                        return false;
+                    }
+                } else {
+                    skull();
+                    System.out.println("You cannot leave.");
                 }
                 break;
             default:
@@ -337,6 +355,7 @@ public class Game {
             int npcGold = npc.getGoldCarried();
             player.setGoldCarried(currentPlayerGold + npcGold);
             System.out.printf("You gained %d gold. Your gold is now: %d \n", npcGold, player.getGoldCarried());
+
             return true; // player wins
         }
     }
