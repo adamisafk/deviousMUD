@@ -114,7 +114,9 @@ public class Player {
 
         // calculate the damage taken + update the variable npc.heathvalue
         if (result >= 15) {
-            int damageDealt = 2;
+            r = new Random();
+            int attackResult = r.nextInt(3);
+            int damageDealt = attackResult;
             this.healthValue = healthValue - damageDealt;
             System.out.println("You took damage!");
         }
