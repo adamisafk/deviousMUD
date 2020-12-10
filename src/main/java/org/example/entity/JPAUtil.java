@@ -115,7 +115,6 @@ public class JPAUtil {
 
         entityManager.getTransaction().commit();
         entityManager.close();
-
     }
 
 

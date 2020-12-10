@@ -100,6 +100,7 @@ public class Player {
             System.out.println("You dealt damage!");
             return damageDealt;
         }
+        System.out.printf("You use your weapon but the %s parries your attack...\n", npc.getName());
         return 0;
     }
 
