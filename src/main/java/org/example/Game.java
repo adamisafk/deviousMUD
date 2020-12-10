@@ -1,9 +1,11 @@
 package org.example;
 
 import org.example.entity.JPAUtil;
-import org.example.entity.NPC;
 import org.example.entity.Score;
+import org.example.entity.NPC;
 
+import javax.swing.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -149,6 +151,20 @@ public class Game {
             case "help":
                 help();
                 break;
+            case "examine npc":
+                describeNPC();
+                break;
+            case "examine chest":
+                describeChests();
+                break;
+            case "talk":
+                NPC npcToTalkTo = selectNPC();
+                if (npcToTalkTo != null) {
+                    if (talkToNPC(npcToTalkTo)) {
+                        return playerBattle(npcToTalkTo);
+                    }
+                }
+                break;
             default:
                 System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
@@ -160,9 +176,22 @@ public class Game {
      */
     public void describeRoom(){
         // print out the room description
-        System.out.println();
-        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom()-1);
-        System.out.println();
+        System.out.println("=============================================================================================================================================");
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom();
+        System.out.println("=============================================================================================================================================");
+    }
+
+    public void describeNPC() {
+        // print out the NPC description
+        System.out.println("=============================================================================================================================================");
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeNPCs(gameBoard.getRoomNpcIds() ,player.getCurrentRoom()-1);
+        System.out.println("=============================================================================================================================================");
+    }
+
+    public void describeChests() {
+        System.out.println("=============================================================================================================================================");
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeChests(gameBoard.getRoomChestIds(), player.getCurrentRoom()-1);
+        System.out.println("=============================================================================================================================================");
     }
 
     public void currentRoomName(){
@@ -384,6 +413,27 @@ public class Game {
             }
         } catch (Exception e){
             return -1;
+        }
+    }
+
+    public boolean talkToNPC(NPC npc) {
+
+        while (true) {
+            System.out.println("What would you like to say to the character?");
+            System.out.println("[1] What are you?");
+            System.out.println("[2] What's in this room?");
+            System.out.println("[3] I have nothing more to say");
+            System.out.println("[4] Attack");
+            int selectAnOption;
+            String answer = stdin.nextLine();
+            int integerAnswer = isIntInRange(answer, 4);
+            if (integerAnswer > 0) {
+                return npc.converseWithAndAttack(gameBoard.getRoomAtIndex(player.getCurrentRoom()-1), integerAnswer);
+            } else if (answer.equals("q")) {
+                return false;
+            } else {
+                System.out.println("Please enter a valid option or type q to quit");
+            }
         }
     }
 
