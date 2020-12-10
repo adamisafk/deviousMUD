@@ -155,6 +155,10 @@ public class Player {
 
     public void setCurrentRoom(int currentRoom) { this.currentRoom = currentRoom; }
 
+    public ArrayList<Item> getItemCarried() { return itemCarried; }
+
+    public void setItemCarried(ArrayList<Item> itemCarried) { this.itemCarried = itemCarried; }
+
     public void equipItem(){
         System.out.printf("You have " + goldCarried + " gold\n");
         while (true){

@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.entity.Item;
+import org.example.entity.JPAUtil;
+import org.example.entity.NPC;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
