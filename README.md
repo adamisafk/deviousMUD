@@ -21,6 +21,9 @@ THEN (in project directory):
 - set the username to <your_username>
 - set password to <your_password>
 
+' "javax.persistence.jdbc.user" value="root" '
+' "javax.persistence.jdbc.password" value="password" '
+
 ### Troubleshooting
 - If all else fails re-pull down the project directory, set mysql root user password to 'password' and use the root
 
