@@ -57,4 +57,4 @@ Note: if this becomes too tedious, type 'quit' at any time to leave the game, yo
 
 ## HELP/Instructions 
 
-Outside of combat type 'help' to view the instructions screen
+Outside of combat type 'help' to view the instructions screen, on some screens to exit you will have to type 'q' or 'quit'
