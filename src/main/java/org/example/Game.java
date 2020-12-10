@@ -2,7 +2,10 @@ package org.example;
 
 import org.example.entity.*;
 
+import javax.swing.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
