@@ -60,5 +60,36 @@ public class BoardTest {
         }
     }
 
+    /**
+     * This tests that the NPCs are alive function is working properly.(used for the boss room)
+     */
+    @Test
+    void testNpcAliveFunction() throws Exception {
+        // generate a test board
+        Board board = new Board(1);
+        board.generateRoomNPCIDs();
+        board.generateNPCHealth();
+        // tests it works when all npcs are alive
+        assertEquals(false, board.allNpcsInRoomAreDead(1));
+        assertEquals(false, board.allNpcsInRoomAreDead(2));
+        assertEquals(false, board.allNpcsInRoomAreDead(3));
+        assertEquals(false, board.allNpcsInRoomAreDead(4));
+        assertEquals(false, board.allNpcsInRoomAreDead(5));
+
+        // now loop over the whole array, set the npc healths to zero and test that it works when they're all dead
+        for (int room = 0; room < 5; room++) {
+            for (int npc = 0; npc < board.getCorrespondingNPCHealth().get(room).size(); npc++) {
+                board.setElementCorrespondingNPCHealth(0,npc,room+1);
+            }
+        }
+
+        // tests it works when all npcs are dead
+        assertEquals(true, board.allNpcsInRoomAreDead(1));
+        assertEquals(true, board.allNpcsInRoomAreDead(2));
+        assertEquals(true, board.allNpcsInRoomAreDead(3));
+        assertEquals(true, board.allNpcsInRoomAreDead(4));
+        assertEquals(true, board.allNpcsInRoomAreDead(5));
+    }
+
 
 }

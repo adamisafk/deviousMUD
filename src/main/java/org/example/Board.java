@@ -119,5 +119,23 @@ public class Board {
     public void destroyChestAtIndex(int currentRoom, int chestIndex) {
         roomChestIds.get(currentRoom-1).remove(chestIndex);
     }
+
+    /**
+     * Function used to count the number of alive npcs in the boss room.
+     * @param roomID the ID of the boss room
+     * @return true if they're all dead
+     */
+    public boolean allNpcsInRoomAreDead(int roomID){
+        // set counter for number of alive npcs
+        int numberOfAliveNPCs = 0;
+
+        for (int i = 0; i < correspondingNPCHealth.get(roomID-1).size(); i++) {
+            if(correspondingNPCHealth.get(roomID-1).get(i) > 0){
+                numberOfAliveNPCs++;
+            }
+        }
+
+        return numberOfAliveNPCs == 0;
+    }
 }
 
