@@ -9,14 +9,13 @@ public class Main
     static Scanner stdin = new Scanner(System.in);
     public static void main(String[] args)
     {
-        ormTest();
         Game game = new Game();
         game.menu();
 
     }
 
     public static void ormTest() {
-        Item item = JPAUtil.getItemByNPCId(54654);
+        Item item = JPAUtil.getItemByNPCId(1);
         System.out.println(item.getName());
     }
 }

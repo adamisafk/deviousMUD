@@ -337,6 +337,14 @@ public class Game {
             int npcGold = npc.getGoldCarried();
             player.setGoldCarried(currentPlayerGold + npcGold);
             System.out.printf("You gained %d gold. Your gold is now: %d \n", npcGold, player.getGoldCarried());
+            // option to give the player the NPC's item
+            Item item = JPAUtil.getItemByNPCId(npc.getId());
+            System.out.println(npc.getName() + " has dropped a " + item.getName() + ". " + item.getDescription());
+            System.out.println("Do you want to pickup and equip the " + item.getName() + "? (Y/N)");
+            String choice = stdin.nextLine().toUpperCase();
+            if(choice.equals("Y")) {
+                pickupItem(npc);
+            }
             return true; // player wins
         }
     }
