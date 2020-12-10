@@ -1,9 +1,11 @@
 package org.example;
 
 import org.example.entity.JPAUtil;
-import org.example.entity.NPC;
 import org.example.entity.Score;
+import org.example.entity.NPC;
 
+import javax.swing.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -149,6 +151,12 @@ public class Game {
             case "help":
                 help();
                 break;
+            case "examine npc":
+                describeNPC();
+                break;
+            case "examine chest":
+                describeChests();
+                break;
             default:
                 System.out.println("I have no idea what you just said, are you a big dumb dumb or something?");
         }
@@ -160,9 +168,22 @@ public class Game {
      */
     public void describeRoom(){
         // print out the room description
-        System.out.println();
-        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom(gameBoard.getRoomNpcIds(), gameBoard.getRoomChestIds(), player.getCurrentRoom()-1);
-        System.out.println();
+        System.out.println("=============================================================================================================================================");
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeRoom(player.getCurrentRoom()-1);
+        System.out.println("=============================================================================================================================================");
+    }
+
+    public void describeNPC() {
+        // print out the NPC description
+        System.out.println("=============================================================================================================================================");
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeNPCs(gameBoard.getRoomNpcIds() ,player.getCurrentRoom()-1);
+        System.out.println("=============================================================================================================================================");
+    }
+
+    public void describeChests() {
+        System.out.println("=============================================================================================================================================");
+        gameBoard.getRoomAtIndex(player.getCurrentRoom()-1).describeChests(gameBoard.getRoomChestIds(), player.getCurrentRoom()-1);
+        System.out.println("=============================================================================================================================================");
     }
 
     public void currentRoomName(){
