@@ -233,6 +233,7 @@ public class Game {
     public void pickupItem(Chest chest) {
         Item item = JPAUtil.getItemByChestId(chest.getId());
         player.pickupItem(item);
+        System.out.printf("...as you grasp at the item contained within the %s, it disintegrates", chest.getName());
     }
 
     /**
@@ -241,7 +242,7 @@ public class Game {
      */
     public NPC selectNPC(){
         while(true) {
-            System.out.println("Which npc?");
+            System.out.println("Which npc [q to quit]?");
             listNPCs();
             int selectedNPC;
             String answer = stdin.nextLine();
@@ -268,7 +269,7 @@ public class Game {
      */
     public Chest selectChest(){
         while(true) {
-            System.out.println("Which chest?");
+            System.out.println("Which chest [q to quit]?");
             listChests();
             String answer = stdin.nextLine();
             if (isIntInRange(answer, gameBoard.getRoomChestIds().get(player.getCurrentRoom()-1).size()) > 0) {

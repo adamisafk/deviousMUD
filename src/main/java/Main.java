@@ -11,7 +11,6 @@ public class Main
     {
         Game game = new Game();
         game.menu();
-
     }
 
     public static void ormTest() {
